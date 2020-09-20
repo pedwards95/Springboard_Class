@@ -1,0 +1,22 @@
+#game div {
+  border: 1px solid black;
+  width: 15%;
+  height: 200px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.blocked
+{
+  background-color : gray;
+}
+
+.blocked:hover
+{
+
+}
+
+body
+{
+  background-color: rgba(56, 26, 141, 0.322)
+}

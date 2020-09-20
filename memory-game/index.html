@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Memory Game!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Memory Game!</h1>
+    <div class="notification"></div>
+    <br/>
+    <div id="game">
+    </div>
+    <button class="restart">Start Game</button>
+    <br/>
+    <label for="color-num">Number of Colors: </label>
+    <input type="number" class="color-num" name="color-num" placeholder="Number of Colors" value = 4 min=2 max=15>
+    <div>
+      Tries: <span class='score'></span>
+    </div>
+    <div>
+      Best: <span class='best'>99</span>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
