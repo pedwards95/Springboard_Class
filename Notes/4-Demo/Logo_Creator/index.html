@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href='app.css'>
+</head>
+<body>
+    <h1>How Forms Work</h1>
+    <form id="monkeyform" action="">
+        <input type="text" placeholder="Monkey Species"></input>
+        <input type = "submit">
+    </form>
+
+</br>
+</br>
+</br>
+</br>
+    <h1>Logo Builder</h1>
+    <p>The easy way to make hideous logos!</p>
+
+    <form action="" id="logoform">
+        <p>
+            <label for="">Enter a brand name:
+                <input type="text" placeholder="brand name" name="brandname">
+            </label>
+        </p>
+        <p>
+            <label for="">Enter a brand color:
+                <input type="color" name="color">
+            </label>
+        </p>
+        <p>
+            <label for="">Enter a font size:
+                <input type="range" name="fontsize" min="10" max="200">
+            </label>
+        </p>
+        <input type="submit">
+    </form>
+
+    <section id="results"></section>
+
+    <script src="app.js"></script>
+</body>
+</html>
