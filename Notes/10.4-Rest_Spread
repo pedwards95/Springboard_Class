@@ -1,0 +1,49 @@
+
+Spread Operator
+    The ... syntax, in a different context, is called the spread operator.
+    For example: when calling a function, you can “spread out” array elements:
+
+        function takesFour(one, two, three, four) {
+          console.log(one);
+          console.log(two);
+          console.log(three);
+          console.log(four);
+        }
+
+        const names = ['Mary', 'Colt', 'Angela', 'Abe'];
+
+        takesFour(...names);
+        // Mary
+        // Colt
+        // Angela
+        // Abe
+
+Spread Operator for copies
+    You can use the same operator to copy over pieces of an array into a new array. This is a shorter version of using concat or writing your own loops
+    Example
+        const nums = [1,2,3]
+        const newNums = [...nums, 4, 5, 6]
+        const newNumsFirst = [4, 5, 6, ...nums]
+        const newNumsInMiddle = [0, ...nums, 4]
+
+Spreading Objects
+    You can use the same operator to copy over pieces of an object into a new object.
+    Example
+        const whiskeyTheDog = {
+          name: 'Whiskey',
+          species: 'canine',
+          cool: true,
+        };
+
+        // make a new dog but override the 'name' key
+        const gandalfTheDog = { ...whiskeyTheDog, name: 'Gandalf' };
+
+        console.log(gandalfTheDog);
+
+Spreading Objects Warning
+    This is a newer feature to JavaScript so it may not work in older browsers - specifically Internet Explorer and Microsoft Edge.
+
+Spreading and copies
+    Using spread will only make a “shallow” copy.
+    If there are nested objects, they will still contain the same reference
+    For a deep copy, use libraries like lodash
