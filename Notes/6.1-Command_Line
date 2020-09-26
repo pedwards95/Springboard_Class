@@ -1,0 +1,73 @@
+Terminal is an application that gives us a command line interface (or CLI) to interact with the computer.
+
+Everything you can do in Finder you can do in Terminal, but it’s faster!
+
+The shell is the program which actually processes commands and returns output.
+    Most shells also manage foreground and background processes, command history and command line editing.
+    These features (and many more) are standard in bash, the most common shell in modern linux systems.
+
+A terminal refers to a wrapper program which runs a shell.
+
+Decades ago, this was a physical device consisting of little more than a monitor and keyboard.
+
+As unix/linux systems added better multiprocessing and windowing systems, this terminal concept was abstracted into software.
+
+Installing Terminal
+If you’re on a Mac or Linux, you’re good to go! Simply launch the Terminal application
+
+If you move into the directory for your user account, you will be in the home directory, which is denoted by ~.
+    A synonym for the /Users/colt path is ~ when you are logged in as colt.
+
+pwd
+    will display the absolute path and let you know what current directory you are working in.
+cd
+    “change directory.”
+ls
+    lists the contents of a directory.
+mkdir
+    To create a folder we use the mkdir command (short for “make directory”), followed by the name (or space-separated names) of the folder(s) that we would like to create.
+touch
+    create a new file. A simple way to create a file is with the touch command.
+    touch first_file
+cat
+    You can display the contents of a file using the cat command.
+echo
+    The echo command simply writes text to the terminal.
+    echo "Hello World" > first_file
+        The > is called a redirect. The > redirects the output from the command on the left side into the file on the right hand side.
+open
+    If you would like to open up a file, you can use the open command.
+mv
+    To move files and folders we use the mv command.
+    mv test.txt ../
+    This can also be used to rename files and folders
+        mv test.txt newfile.txt
+cp
+    To copy a file, we use the cp command (short for copy).
+    cp PATH_TO_ORIGINAL_FILE PATH_TO_COPIED_FILE
+    This can also copy and rename the copy if used this way:
+        cp test.txt test_copy.txt
+    In order to copy a directory, you need to modify the cp command as follows:
+        cp -r first_folder first_folder_copy
+rm
+    To remove a file or folder we use the rm command.
+    If this works, you should not see any output from the Terminal. (You can always run ls make sure the file is not there)
+    There is no undo so be VERY careful when using the rm command.
+rmdir
+    rm is for a file, while the command rmdir is used to remove (empty) directories.
+    If there is anything inside the folder, you will have to use rm -rf.
+    Like we saw with cp, the r and f in -rf are examples of flags.
+
+Useful keyboard shortcuts
+Command/Control + a (move to beginning of line)
+Command/Control + e (move to end of line)
+Command/Control + w (delete the word where your cursor is)
+Command/Control + u (delete an entire line)
+Option/Alt + left/right (jump between words)
+
+Flags
+    Flags can change and even enhance commands and are added using a - after the command.
+        With ls, we can pass in  -a   to list “all” files (including hidden files and folders).
+        If we want the ls command to give us more information about each file, we can pass in the -l flag.
+    To combine flags we can just use one - and pass in each flag.
+        So the command to use ls and show all files and more detailed information about each one would be ls -la.

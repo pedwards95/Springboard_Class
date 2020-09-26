@@ -1,0 +1,111 @@
+SyntaxError
+    Type something wrong
+
+ReferenceError
+    Thrown when you try to access a variable that is not defined
+    This does not mean undefined
+
+TypeError
+    Trying to do something with a type that you can not
+    Accessing properties on undefined or null
+    Invoking (“calling”) something that is not a function
+
+Two Kinds of Bugs
+    An error is thrown — easier
+    You didn’t get what you wanted — harder!
+
+A process for debugging
+    Make assumptions
+    Test assumptions
+    Prove assumptions
+    Repeat
+
+console.log
+
+JavaScript Debugger
+    Watch execution of code and examine at any point
+    Built into Chrome (other browsers have similar abilities)
+    Can debug in-browser code or Node
+Starting Debugger
+
+
+View → Developer → Developer Tools → Sources tab
+
+Click left of line of code to add a blue breakpoint
+
+Can put breakpoint into code itself:
+    function myFunction() {
+      let x = 1;
+      debugger;   // <-- will always stop here
+      // rest of code follows ...
+    }
+
+
+Introducing try / catch
+try {
+  // place the code you would like to try to run
+} catch(err){
+  // if an error occurs, run whatever code we place in here!
+}
+
+Another example
+function displayInitials(user){
+  let firstNameLetter = user.firstName[0].toUpperCase();
+  let lastNameLetter = user.lastName[0].toUpperCase();
+  return `Hello ${firstNameLetter}.${lastNameLetter}`;
+}
+What happens when we don’t pass in an object?
+
+What happens when our object does not have the correct keys or values?
+
+Using try / catch
+function displayInitials(user){
+  let firstNameLetter;
+  let lastNameLetter;
+  try {
+    firstNameLetter = user.firstName[0].toUpperCase();
+    lastNameLetter = user.lastName[0].toUpperCase();
+  } catch(e){
+    return "Invalid input!";
+  }
+  return `Hello ${firstNameLetter}.${lastNameLetter}`;
+}
+Strive to only place code that will throw an error inside your try/catch block!
+
+
+Making your own errors!
+
+console.log("an error is coming....");
+throw "What just happened?!?";
+console.log("did we make it?");
+
+Exploring with try/catch
+    try {
+      throw "Oh no!";
+    } catch (err) {
+      console.log("what happened?", err);
+    }
+All we see here is the string that we passed to throw with no information about the kind of error or where it happened.
+
+
+Throwing better errors
+Instead of just using the throw keyword, you can make a new Error object using the new keyword.
+    try {
+      throw new Error("Oh no!");
+    } catch (err) {
+      console.log("what kind of error?", err.name);
+      console.log("what is the message?", err.message);
+      console.log("where did it happen?", err.stack);
+    }
+
+
+finally
+try/catch blocks come with another optional keyword finally which will execute code regardless if an error is thrown or not
+
+try {
+  undefined(); // this will throw a TypeError
+} catch (err){
+  console.log("something went wrong!", err);
+} finally {
+  console.log("we're all done!");
+}

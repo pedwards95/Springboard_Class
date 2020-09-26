@@ -1,0 +1,41 @@
+In plain English, Git is a tool that allows developers to track versions of their code over time.
+    When you’re learning about tools like Git, you’ll often see the acronym VCS. This stands for Version Control System
+    Git is a VCS because it lets you create different versions of your code and easily swap back and forth between different versions.
+
+Once you have Git installed, you need to “initialize” a repository with Git before you can start using it
+    run the command git init inside of a folder to do this!
+        This creates a .git folder which is what allows you to start using git in that folder
+
+If you accidentally initialize a repository in the wrong directory
+    you can just remove the .git folder using rm -rf .git.
+
+Working Directory
+    The working directory holds files that we are working on but have not yet saved to git
+    As files are edited, git sees that they have been modified but their changes are not recorded
+
+Git add
+    Git add is used to save our modified files so that they will be included in the next commit
+    This allows us to choose what modified changes we want to save and which changes we want to ignore
+    The command git add followed by the name of the file moves that file to the staging area
+    To move all modified files to the staging area at once we use git add .
+
+Staging Area
+    If we move a modified file to the staging area, we are preparing to commit the state of the file at that point
+    If we continue working on that file we have to add again or the new changes won’t be tracked
+    The staging area is where we save the state of the work we are preparing to include with the next commit
+
+Git commit
+    Once we are satisfied with the work of a file in our staging area we commit it to the local repository
+    We need include a commit message that sumarizes the changes that were made in that commit
+    The message is connected to the commit with the -m flag
+        git commit -m “summary of this commit”
+    A commit is still local until we push it to a remote repository
+
+git status - What files have been added / modified?
+git diff - Among those files, what has been changed?
+git add <NAME_OF_FILE> - Add NAME_OF_FILE to staging area
+git commit -m - Commit the file with a message!
+git log - See a log of all your commits
+
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR EMAIL"

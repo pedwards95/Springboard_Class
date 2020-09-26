@@ -1,0 +1,54 @@
+some
+  Iterates through an array
+  Runs a callback on each value in the array
+  If the callback returns true for at least one single value, return true
+    Otherwise, return false
+  the result of the callback will always be a boolean
+An Example
+  let numbers = [1,2,3];
+
+  numbers.some(function(value, index, array){
+    return value < 3;
+  });
+
+every
+  Iterates through an array
+  Runs a callback on each value in the array
+  If the callback returns false for any single value, return false
+    Otherwise, return true
+  the result of the callback will always be a boolean
+An Example
+  let numbers = [1,2,3];
+
+  numbers.every(function(value, index, array){
+    return value > 0;
+  });
+
+  // true
+
+Find
+  Iterates through an array
+  Runs a callback on each value in the array
+  If the callback returns true at any point, return the value in the array that we’re iterating over
+    Otherwise, return undefined
+An Example
+  let arr = [1,2,3];
+
+  arr.find(function(value, index, array){
+    return value === 2;
+  });
+
+  // 2
+
+findIndex
+  Iterates through an array
+  Runs a callback on each value in the array
+  If the callback returns true for any single value, return the index at which that value is found
+    Otherwise, return -1
+An Example
+  let arr = [1,2,3];
+
+  arr.findIndex(function(value, index, array){
+    return value < 2;
+  });
+  // 0

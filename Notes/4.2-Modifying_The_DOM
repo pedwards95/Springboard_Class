@@ -1,0 +1,87 @@
+querySelector
+querySelectorAll
+getElementById
+getElementsByClassName
+getElementsByTagName
+
+  The easiest way to access the text of an element is to use innerText
+  If you need to change any text, you can assign a new value to the innerHTML:
+  Another common way to access and modify text is to use the textContent property
+
+So what’s the difference?
+  innerText is aware of the rendered appearance of text, while textContent is not.
+  textContent gets the content of all elements, including <script> and <style> elements. In contrast, innerText only shows “human-readable” elements.
+  depending on the complexity of the content inside an element, innerText can be a bit less performant that textContent
+  If you need to access the HTML of an element, you can use innerHTML. This will include all the elements inside of the one you select.
+  You will find yourself using innerText more commonly, there are some security concerns when using innerHTML if you’re not careful.
+
+
+In order to access an attribute on an element, you can use the getAttribute method
+  const firstInput = document.querySelector("input")
+  firstInput.getAttribute("type") // "text"
+  firstInput.setAttribute("type", "email") // "text"
+
+There are a few attributes that you can directly access and modify as well instead of having to use getAttribute or setAttribute.
+  const firstInput = document.querySelector("input")
+  firstInput.id // "first-name"
+  firstInput.id = "full-name" // changes the attribute
+
+  firstInput.value // ""
+  firstInput.value = "Just added some value!" // changes the attribute
+
+We have quite a few ways to manipulate the class attribute in JavaScript:
+  setAttribute(“class”) - this will override the class
+  className - this will give you a string representation of the class
+  classList - this will give you an array-like object to add, remove or toggle classes
+  setAttribute(“class”)
+
+  const mainHeading = document.querySelector("h1")
+  mainHeading.setAttribute("class", "section-heading");
+    this works, but will overwrites the previous class
+
+  const mainHeading = document.querySelector("h1")
+  mainHeading.className += " top-heading" // works, but is prone to bugs
+
+An easier way to interact with classes on an element is to use the .classList method
+  const mainHeading = document.querySelector("h1")
+  mainHeading.classList // []
+  mainHeading.classList.add("top-heading") // ["top-heading"]
+  mainHeading.classList.remove("top-heading") // []
+  mainHeading.classList.toggle("top-heading") // true
+  mainHeading.classList.contains("top-heading") // true
+
+To create an HTML element, we can use the createElement function and pass in the name of the element
+  const newButton = document.createElement("button");
+  const newUnorderedList = document.createElement("ul");
+  const newDiv = document.createElement("div");
+  newDiv.innerText = "a brand new div!"
+  newDiv.style.color = "tomato"
+
+After you create an element, you need to place it in the DOM to see it. You can do this using the append method.
+  const ul = document.querySelector("ul");
+  const newLi = document.createElement("li");
+  newLi.innerText = "Hello!";
+  ul.append(newLi);
+append will place the element as the last child in the parent. If you would like the element to be the first child, you can use the prepend method.
+
+Removing Elements
+  const ul = document.querySelector("ul");
+  ul.remove();
+
+If you want to access the parent element of another element, you can use the parentElement method.
+  const foundDiv = document.querySelector("div")
+  foundDiv.parentElement // <section></section>
+
+If you want to access the child elements of another element, you can use the children method.
+  foundDiv.children // HTMLCollection(2) [p, ul]
+  foundDiv.firstElementChild // <p>Here is a paragraph inside a div!</p>
+  foundDiv.lastElementChild // <ul></ul>
+
+If you want to access the previous sibling or next sibling element of another element, you can use the previousElementSibling or nextElementSibling method.
+  foundDiv.previousElementSibling // <h1>Here is a main heading!</h1>
+  foundDiv.nextElementSibling // <div>Here is the second div!</div>
+
+Nodes Vs. Elements
+  With some of these finder methods, you will see that you don’t always get back an HTML element, you sometimes get back what is called a text node
+  Everything in the DOM is a node, some nodes are not actually HTML elements, but text or even comments!
+  With most of the common traversal methods, you will not need to worry about text nodes,

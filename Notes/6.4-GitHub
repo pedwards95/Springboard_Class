@@ -1,0 +1,27 @@
+In short, Git is a Version Control System. GitHub is an online platform for hosting and sharing code, text files and even more complex file formats.
+
+git remote add NAME_OF_REMOTE URL_FOR_REPOSITORY
+NAME_OF_REMOTE: origin
+URL_FOR_REPOSITORY: https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git remote add
+This command tells our local repository about a remote repository located somewhere.
+
+The location of our remote repository is https://github.com/YOUR_USERNAME/YOUR_REPO.git.
+
+git push origin
+Now if we want to send our code to GitHub we could type in
+
+Once the alias is set up we can simply type
+    git push origin master
+    This will send the code from our master branch to this remote repository.
+    To see where your remotes are pointing to locally, type git remote -v.
+    This will display both the alias and the remote url
+    If you need to remove a remote you can use git remote rm NAME_OF_REMOTE
+
+Pushing Your Code
+    The command we use is git push NAME_OF_REMOTE NAME_OF_BRANCH
+
+Setting the upstream
+    git push -u origin master
+    Now we can send our code from a local repository to our remote repository (which we aliased to origin in the previous command).
+    The -u flag allows us in the future to only have to type git push instead of git push origin master.

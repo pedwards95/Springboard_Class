@@ -1,0 +1,15 @@
+git branch
+    To see your branches, type git branch in the terminal.
+    To list all branches on GitHub or remote branch we pass the -a flag
+        The flag does not matter right now, but it’s good to get in the habit of using git branch -a.
+git checkout -b NAME_OF_BRANCH
+    To create a new branch we use the git checkout command with the -b flag and then pass in a name of a branch.
+    This creates the branch and moves you to the newly created branch
+git checkout NAME_OF_BRANCH
+    To move back to master (or to any other branch) we use the command git checkout NAME_OF_BRANCH
+git branch -d NAME_OF_BRANCH
+    In order to delete a branch we have to be currently be on a different branch
+    Then we can run the command git branch -d NAME_OF_BRANCH
+    To force the delete use a capital D flag in our command git branch -D NAME_OF_BRANCH
+git merge
+    Merge our changes from the feature branch into the master branch

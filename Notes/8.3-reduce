@@ -1,0 +1,31 @@
+reduce
+  Whatever is returned from the callback function, becomes the new value of the accumulator!
+
+  Accepts a callback function and an optional second parameter
+  Iterates through an array
+  Runs a callback on each value in the array
+  The first parameter to the callback is either the first value in the array or the optional second parameter
+  The first parameter to the callback is often called “accumulator”
+  The returned value from the callback becomes the new value of accumulator
+
+Example
+  let names = ['Maya', 'Tammy', 'Angela', 'Alexis'];
+
+  names.reduce(function(accumulator, nextValue){
+    if(nextValue !== "Colt"){
+      return accumulator += ' ' + nextValue;
+    }
+    return accumulator;
+  },'My friends are');
+
+  /*
+    Here is what reduce will build up:
+
+    'My friends are Maya'
+    'My friends are Maya Tammy'
+    'My friends are Maya Tammy Angela'
+
+    With a final output of:
+
+    'My friends are Maya Tammy Angela Alexis'
+  */

@@ -1,0 +1,104 @@
+DOM events are “actions” that occur as a result of something the user or the browser does.
+
+We can use JavaScript to execute code when these kinds of “events” happen.
+    This is commonly called Event Driven Programming
+
+
+So How Do We Do It? We have three options!
+    Attach the name of the function to the element in HTML
+    Attach the name of the function to an element in JavaScript
+    Use the addEventListener method
+
+Attaching The Name Of The Function
+    <h1 onclick="runClickHandler()"> Hello World </h1>
+
+In HTML
+    function runClickHandler(){
+      console.log("You just clicked the h1 element!";
+    })
+
+Adding In Javascript
+    const h1 = document.querySelector("h1");
+
+    h1.onclick = function(){
+      console.log("You just clicked the h1 element!";
+    }
+
+Using addEventListener
+    const h1 = document.querySelector("h1");
+
+    h1.addEventListener("click", function(){
+      console.log("You just clicked the h1 element!";
+    })
+
+addEventListener is our preferred method
+    It gives us the most flexibility around our event listeners
+    It avoids writing any inline code in our HTML and keeps our HTML and JS seperate
+        This is commonly called “Separation of Concerns”
+
+DOMContentLoaded is an event that waits for the DOM to load
+    document.addEventListener("DOMContentLoaded", function(){
+      // place your code inside here
+    })
+
+Inside of the callback to addEventListener, we get access to a special object as a parameter - the event object
+    const h1 = document.querySelector("h1");
+    // we can call this parameter whatever we want - event is very common
+    h1.addEventListener("click", function(event){
+      console.log(event) // let's take a look!
+    })
+
+What Is Inside Of The Event Object?
+    target - what element is the target of the event
+    pageX / pageY - where on the page did this event occur?
+    key - what key was pressed that triggered this event?
+    preventDefault() - a function used to prevent the default behavior of the event.
+        This is very useful for stopping form submissions from refreshing the page which is their default behavior
+
+Adding Multiple Event Listeners
+    const buttons = document.querySelectorAll("button");
+    for (let button of buttons) {
+      button.addEventListener("click", function(event) {
+        event.target.parentElement.remove();
+      });
+    }
+
+Event Delegation
+    The idea behind event delegation is that we make a parent element the “delegate”
+    We attach a single event listener on the parent or delegate element and then if the event happens inside a certain child element,
+      we can access that child element using event.target
+        friendList.addEventListener("click", function(event) {
+          if (event.target.tagName === "BUTTON") {
+            event.target.parentElement.remove();
+          }
+        });
+
+Removing Event Listeners
+    removeEventListener needs a reference to the name of the function to remove
+        function alertData(){
+          alert("You just clicked a button");
+        }
+
+        for(let button of buttons){
+          button.removeEventListener("click", alertData);
+        }
+    annonymous functions will not work here!
+
+Data attributes
+    When creating elements and HTML pages, it’s very common that you might want to add some metadata or additional information about elements
+    These are not things that the user should see, but accessible information in CSS and JavaScript
+    An example
+        <li data-model="model 3" data-year="2014">Tesla</option>
+        <li data-model="crv" data-year="2017">Honda</option>
+        <li data-model="focus" data-year="2011">Ford</option>
+        <li data-model="prius" data-year="2015">Toyota</option>
+
+        const ul = document.querySelector("ul");
+        ul.addEventListener("click", function(event) {
+          const selectedElement = event.target;
+          console.log("see all data attributes", selectedElement.dataset);
+          console.log(
+            "see one data attribute",
+            selectedElement.getAttribute("data-model")
+          );
+        });

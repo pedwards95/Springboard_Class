@@ -1,0 +1,112 @@
+Html:
+    Items
+        <div></div>
+        <h1></h1> -> <h6></h6>
+        <p></p>
+        <span></span>
+        <ul></ul>            - unordered list
+        <ol></ol>            - ordered list
+        <li></li>            - list item
+        <script></script>
+        <link rel="" type="" href="" />
+        <a href=""></a>
+        <img src="" alt="" />
+        <table>
+            <thead>          - used to group header content in an HTML table.
+              <tr>           - Table row
+                <th></th>    - Header Cell
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>          - used to group the body content in an HTML table.
+              <tr>
+                <td></td>    - table data , also called a cell
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+        </table>
+        <form>
+          <label for="name">name</label>
+          <input type="text" name="name" placeholder="" />
+          <input type="submit" value="Submit" />
+        </form>
+    Questions
+        What is the difference between a ul and a ol tag?
+            ul is un-ordered list. It is just bullet points. ol is ordered list. It has numbers, numerals, or something similar to indicate order.
+        explain block element vs inline element
+            A block element takes up all of the space available to it. If the element could be the entire page width, a block element will be.
+            A span element only takes up the space it needs. Span elements can be placed side by side.
+        What is the script tag used for?
+            embedding javascript into the web page
+        What is the difference between a link tag and a anchor tag?
+            The anchor element is used to link to another page or to a certain part of the page if you use its ID.
+            The link tag defines a link between a document and an external resource. The link tag is used to link to external style sheets.
+        Why is it important to include an alt attribute inside of an img tag?
+            The alt attribute displays text if the img tag does not load or is still loading. This is best to give the user an idea of what is going on, and not leave them confused.
+        How to use the 'for' attribute?
+            Specifies the id of the form element the label should be bound to.
+        Understand the most common input tag attributes
+            type - type of input (text,number,date,ect)
+            name - The name attribute specifies a name for the element. This name attribute can be used to reference the element in a JavaScript.
+            placeholder - a short hint about what is expected in the input
+            value - a default value in the input
+CSS:
+    Attributes
+        div {
+          background: crimson;
+          color: grey;
+          font-family: Helvetica;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        div {
+          width: 10%;
+          height: 20%;
+          margin: 10px;
+          padding: 20px;
+        }
+        div {
+          margin-top: 10px ;
+          margin-right: 12px;
+          margin-bottom: 10px;
+          margin-left: 8px;
+        }
+        div {
+          margin: 10px 12px 10px 8px;
+        }
+
+        div {
+          margin: 20px;
+        }
+
+        div {
+          border: 2px solid grey;
+        }
+        static
+        fixed
+        relative
+        absolute
+    Questions
+        Why is the specificity of our selectors important?
+            Specificity is the means by which browsers decide which CSS property values are the most relevant to an element and, therefore, will be applied.
+            Specificity is based on the matching rules which are composed of different sorts of CSS selectors. Type selectors < Class selectors < ID selectors
+        When to use a class selector and when to use id selector?
+            The difference between an ID and a class is that an ID can be used to identify one element, whereas a class can be used to identify more than one.
+Javascript
+    Terms
+        var
+            can reassign, can redeclare, function scope
+        let
+            can reassign, can NOT redeclare, block scope
+        const
+            can NOT reassign, can NOT redeclare, block scope
+    Methods
+        .slice
+            returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of
+              items in that array.
+
+
