@@ -1,0 +1,120 @@
+body
+{
+    background-color: rgba(143, 116, 218, 0.452)
+}
+
+.meme
+{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin-left: 35%;
+    border: 2px solid black
+}
+
+.meme-text
+{
+    font-family: 'Ranchers', cursive;
+    text-align: center;
+}
+
+.top
+{
+    left: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 200;
+}
+
+.bot
+{
+    left: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.color-label
+{
+    margin-left: 5%;
+}
+
+.meme-submit-button
+{
+    margin-left: 10%;
+}
+
+.my-form
+{
+    margin-left: 23%;
+}
+
+.spawn-meme-form
+{
+    height: 40px;
+    width: 300px;
+    margin-left: 35%;
+    font-size: 18px;
+}
+
+.delete-button
+{
+    margin-left: 40%;
+    background-color: rgb(228, 142, 142);
+}
+
+.delete-button:hover
+{
+    background-color: rgb(179, 81, 81);
+}
+
+.top-text-input
+{
+    height: 30px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.bottom-text-input
+{
+    height: 30px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.image-url-input
+{
+    height: 30px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.color-label
+{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.color-input
+{
+    height: 25px;
+    width: 60px;
+}
+
+.meme-submit-button
+{
+    height: 6%;
+    width: 10%;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.delete-button-form
+{
+    height: 6%;
+    width: 10%;
+    font-size: 20px;
+    font-weight: 700;
+}
