@@ -1,3 +1,20 @@
+body {
+  margin-left: 37%;
+  background-color: rgb(238, 215, 185);
+}
+
+th {
+  margin: 4px;
+  padding: 10px;
+  border: solid 5px darkgoldenrod;
+  background-color: rgb(134, 98, 5);
+  font-size: 30px;
+}
+
+#board {
+  border: solid 1px black;
+}
+
 #board td {
   width: 50px;
   height: 50px;
@@ -9,10 +26,16 @@
   margin: 5px;
   width: 80%;
   height: 80%;
+  border: solid 2px darkolivegreen;
+}
+
+.gameSlot {
+  background-color: rgb(199, 172, 137);
 }
 
 .column-top td {
   border: dashed 1px lightgray;
+  background-color: rgb(226, 214, 197);
 }
 
 .column-top td:hover {

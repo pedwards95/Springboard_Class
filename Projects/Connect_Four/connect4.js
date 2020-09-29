@@ -5,6 +5,8 @@
  * board fills (tie)
  */
 
+// codbin wouldnt save :(
+
 window.addEventListener('load', onInit);
 
 // global values
@@ -70,6 +72,9 @@ function makeHtmlBoard(width, height) {
 	const myBoardBody = document.createElement('tbody');
 	const myBoardTitle = document.createElement('th');
 	myBoardHead.append(myBoardTitle);
+	myBoardTitle.innerText = 'Connect Four';
+	myBoardTitle.setAttribute('COLSPAN', width);
+
 	myBoard.style.opacity = 1;
 
 	// this part creates the top row, which only needs to be created separately for the unique class tags.
