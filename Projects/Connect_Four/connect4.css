@@ -12,6 +12,7 @@ th {
 }
 
 #board {
+  position: relative;
   border: solid 1px black;
 }
 
@@ -22,10 +23,12 @@ th {
 }
 
 .piece {
+  position: absolute;
+  left: -5px;
   border-radius: 25px;
   margin: 5px;
-  width: 80%;
-  height: 80%;
+  width: 50px;
+  height: 50px;
   border: solid 2px darkolivegreen;
 }
 

@@ -82,6 +82,9 @@ function makeHtmlBoard(width, height) {
 	const myTopRow = document.createElement('tr');
 	myTopRow.classList.toggle('column-top');
 	myTopRow.addEventListener('click', handleClick);
+	myTopRow.addEventListener('hover', function (event) {
+		spawnFake(event);
+	});
 	myTopRow.setAttribute('y', height);
 	height--;
 	myBoardBody.append(addColumns(myTopRow, width));
@@ -116,8 +119,9 @@ function findSpotForCol(x) {
 	//also adds to filled counter if whole column is filled
 	if (myReturn) {
 		myReturn.classList.toggle('filled');
-		if (myReturn.getAttribute('y') >= HEIGHT) {
+		if (Number.parseInt(myReturn.getAttribute('y')) >= HEIGHT) {
 			filledRows += 1;
+			console.log('filled rows', filledRows);
 			if (filledRows >= WIDTH) {
 				endGame('The game is a tie!');
 				messageBox.innerText = 'Tied game!';
@@ -152,6 +156,9 @@ function placeInBoard(x, player) {
 	const mySlot = findSpotForCol(x);
 	if (mySlot) {
 		mySlot.append(myNewPiece);
+		myNewPiece.setAttribute('x', mySlot.getAttribute('x'));
+		myNewPiece.setAttribute('y', mySlot.getAttribute('y'));
+		animateDrop(myNewPiece);
 		switch (player) {
 			case 1:
 				myNewPiece.style.backgroundColor = 'blue';
@@ -182,6 +189,8 @@ function placeInBoard(x, player) {
 function endGame(msg) {
 	if (!gameOver) {
 		gameOver = true;
+		alert(msg);
+	} else {
 		alert(msg);
 	}
 }
@@ -329,21 +338,16 @@ function checkForWinAdvanced(x, y, player, type) {
 	//timeout on alert so that DOM updates first
 	if (matches >= 4) {
 		const myBoard = document.querySelector('#board');
+		gameOver = true;
 		myBoard.style.opacity = 0.2;
 		if (player == 'x') {
 			messageBox.innerText = 'Player 1 wins!';
-			setTimeout(() => {
-				endGame('Player 1 wins the game!');
-				messageBox.innerText = 'Player 1 wins!';
-			}),
-				1000;
+			setTimeout(endGame, 1500, 'Player 1 wins the game!');
+			messageBox.innerText = 'Player 1 wins!';
 		} else {
 			messageBox.innerText = 'Player 2 wins!';
-			setTimeout(() => {
-				endGame('Player 2 wins the game!');
-				messageBox.innerText = 'Player 2 wins!';
-			}),
-				1000;
+			setTimeout(endGame, 1500, 'Player 2 wins the game!');
+			messageBox.innerText = 'Player 2 wins!';
 		}
 	}
 }
@@ -389,3 +393,31 @@ function randomText(player) {
 	];
 	return quotePool[Math.floor(Math.random() * quotePool.length)];
 }
+
+function animateDrop(piece) {
+	let currHeight = 10;
+	piece.style.top = `${currHeight}px`;
+	let slowMath1 = Number.parseInt(piece.getAttribute('y'));
+	let slowMath2 = HEIGHT - slowMath1;
+	let slowMath3 = slowMath2 * 56;
+	let finalY;
+	if (slowMath3 == 0) {
+		finalY = slowMath3 + 64;
+	} else {
+		finalY = slowMath3 + 8;
+	}
+
+	let finalX = Number.parseInt(piece.getAttribute('x')) * 56 - 3;
+	piece.style.left = `${finalX}px`;
+
+	let id = setInterval(function () {
+		if (currHeight < finalY) {
+			currHeight += 2;
+			piece.style.top = `${currHeight}px`;
+		} else {
+			clearInterval(id);
+		}
+	}, 5);
+}
+
+function spawnFake(event) {}
