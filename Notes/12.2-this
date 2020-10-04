@@ -1,0 +1,38 @@
+Everything is called on something, like a method.
+    In browser JS, that’s window (the browser window)
+    in NodeJS, that’s global (where some Node utilities are)
+
+Therefore, a “function” called at the top level is same as:
+    alert("Hi!");
+    window.alert("Hi!");   // -- same thing!
+
+apply()
+    There is a related function, apply(): for this, you can pass the list of arguments to the function as an array, rather than passing one-by-one.
+    This used to be a very important technique, since it was the only reasonable way to call a function that expected several individual arguments
+    where you already had those arguments in a list:
+        Math.max(1, 2, 3);       // Math.max expects indiv arguments
+        let myNums = [1, 2, 3];  // If you already have an array ...
+        Math.max.apply(null, myNums);  // pass that array as indiv arguments
+                               // (don't care what "this" is, so pass `null`)
+
+Bind
+    You can “perma-bind” a function to a context:
+        fDance("tango");       // error -- this isn't the cat
+        fDance.call(fluffy, "tango");   // ok but tedious to always do
+
+        let betterDance = fDance.bind(fluffy);
+        betterDance("tango");  // ok -- bound so that `this` is Fluffy
+    bind is a method on functions that returns a bound copy of the function.
+
+Binding Arguments
+    You can also bind arguments to functions. That will bake them into the function.
+        function applySalesTax(taxRate, price) {
+          return price + price * taxRate;
+        }
+
+        // "null" for "this" means it doesn't matter what "this" is
+        const applyCASalesTax = applySalesTax.bind(null, 0.0725);
+        applyCASalesTax(50);  // 53.63
+
+        myBtn.addEventListener("click", fluffy.dance.bind(fluffy));
+            That will work — when it calls that callback, it will always be on Fluffy!
