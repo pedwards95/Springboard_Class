@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='app.css'>
+</head>
+<body>
+    <form>
+        <label for='movie-title'>Movie Title</label>
+        <input id='movie-title'/>
+        <label for='movie-rating'>Movie Rating</label>
+        <input id='movie-rating' type='number' value=5 min=0 max=0/>
+        <button type= 'submit' id='submit'>Submit</button>
+    </form>
+    <div class='sort'>
+        <button id = 'sort-name'>Sort By Name</button>
+        <button id = 'sort-low'>Sort By Rating LOW > HIGH</button>
+        <button id = 'sort-high'>Sort By Rating HIGH > LOW</button>
+    </div>
+    <div class='movies'></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
