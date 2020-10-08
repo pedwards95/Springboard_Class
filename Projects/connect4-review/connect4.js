@@ -17,14 +17,17 @@ let currPlayer = 1; // active player: 1 or 2
 let board;
 
 //starts a new game. ensures global values are initialized.
+////great job with a initializer function like this
 function newGame() {
 	gameOver = false;
 	filledRows = 0;
 	messageBox.innerText = '';
+	////use arrays instead, with map you can't iterate on col, or rows
 	board = new Map();
 	WIDTH = document.querySelector('#options #boardWidth').value;
 	HEIGHT = document.querySelector('#options #boardHeight').value;
 	makeBoard(WIDTH, HEIGHT);
+	makeHtmlBoard(width, height);
 }
 
 //basic initialization logic for new game compatibility.
@@ -45,7 +48,8 @@ function makeBoard(width, height) {
 			board.set(`${i}${q}`, '');
 		}
 	}
-	makeHtmlBoard(width, height);
+	////this shouldn't be inside the makeBoard function
+	//makeHtmlBoard(width, height);
 }
 
 //helper method for adding rows to a column
@@ -103,7 +107,8 @@ function makeHtmlBoard(width, height) {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 function findSpotForCol(x) {
 	//narrow down the column
-	const myColumn = Array.from(document.querySelectorAll('.gameSlot')).filter(
+	////instead, filter this from the board variable
+	const myColumn = Array.from(document.querySelectorAll('.gameSlot2')).filter(
 		(val, i, arr) => {
 			return val.getAttribute('x') == x;
 		}
@@ -117,6 +122,7 @@ function findSpotForCol(x) {
 	//also adds to filled counter if whole column is filled
 	if (myReturn) {
 		myReturn.classList.toggle('filled');
+		////this function shouldn't worry about checking for a win condition
 		if (Number.parseInt(myReturn.getAttribute('y')) >= HEIGHT) {
 			filledRows += 1;
 			console.log('filled rows', filledRows);
@@ -126,6 +132,8 @@ function findSpotForCol(x) {
 			}
 		}
 	} else {
+		////this function shouldn't worry about returning a message,
+		/// it's job is to just find a empty spot
 		messageBox.innerText = 'That row is filled!';
 	}
 
@@ -137,12 +145,14 @@ function findSpotForCol(x) {
 function placeInTable(x, y, player) {
 	switch (player) {
 		case 1:
+			////extra complexity , with no real gains, here you could just set a 1/2 value
 			board.set(`${x}${y}`, 'x');
 			break;
 		case 2:
 			board.set(`${x}${y}`, 'o');
 			break;
 	}
+	////this should only place in table, not check for a win condition
 	// check for win
 	checkForWin(x, y, currPlayer);
 }
@@ -185,6 +195,9 @@ function placeInBoard(x, player) {
 
 /** endGame: announce game end */
 function endGame(msg) {
+	//// just gameOver = true and alert message
+	gameOver = true;
+	alert(msg);
 	if (!gameOver) {
 		gameOver = true;
 		alert(msg);
@@ -201,6 +214,8 @@ function handleClick(evt) {
 	// get x from ID of clicked cell
 	const x = evt.target.getAttribute('x');
 
+	////here should be the function that you manages
+	//// and orchestrates all other functions together
 	// place piece in board and add to HTML table
 	placeInBoard(x, currPlayer);
 }
@@ -338,19 +353,13 @@ function checkForWinAdvanced(x, y, player, type) {
 		const myBoard = document.querySelector('#board');
 		gameOver = true;
 		myBoard.style.opacity = 0.2;
-		if (player == 'x') {
-			messageBox.innerText = 'Player 1 wins!';
-			setTimeout(endGame, 1500, 'Player 1 wins the game!');
-			messageBox.innerText = 'Player 1 wins!';
-		} else {
-			messageBox.innerText = 'Player 2 wins!';
-			setTimeout(endGame, 1500, 'Player 2 wins the game!');
-			messageBox.innerText = 'Player 2 wins!';
-		}
+		return true;
 	}
+	return false;
 }
 
 //random 'its your turn' quotes for the message box
+////great job with the messages and user experience in general
 function randomText(player) {
 	const quotePool = [
 		`Player ${player}, its your turn!`,
