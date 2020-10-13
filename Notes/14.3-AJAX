@@ -1,0 +1,75 @@
+Traditional Requests
+    Traditional browser requests happen in response to:
+        Entering a URL in the browser bar
+        Clicking on a link
+        Submitting a form
+    In all cases:
+        Browser makes request
+        Receives response
+        Replaces entire resource with result
+
+AJAX web request:
+    Made from JavaScript in browser
+    JavaScript makes request (GET, POST, or other)
+    You receive a response
+    Do whatever you want with result!
+    AJAX is a technique in Javascript for sending requests and receiving responses from a server without having to reload the browser page.
+
+What Does AJAX stand for?
+    AJAX originally was an acronym for “Asynchronous Javascript and XML”. However many people don’t send XML over AJAX nowadays;
+        it’s more common to send HTML or JSON.
+    The technology is still the same, though, even if the data payload is commonly different.
+    Ultimately, AJAX is a cooler sounding acronym than AJAJ or AJAH.
+
+
+AJAX with Axios
+    You don’t have to use Axios for this
+    There is an old, clunky built-in tool: (XMLHttpRequest)
+    Or a newer-but-still-clunky built-in tool: (fetch)
+    Or lots of other libraries (including jQuery)
+
+Making a Simple Request
+    axios.get(url)
+
+What’s A Promise?
+    a promise is like a placeholder for a future value.
+    We want to wait for the promise to have that value before proceeding.
+
+Asynchronicity
+    AJAX requests are asynchronous
+    The axios.get() completes before the response is received
+    This means that if we want to use the data we get back from our AJAX requests, we need to wait until the response has been given to us
+    Here’s what it looks like:
+        await axios.get('/api/card');
+
+Async
+    Outside of all functions (like in the console), you can just use await.
+    To use in a function, you must mark that function as async:
+        async function getCardInfo() {
+          let response = await axios.get("/api/card");
+          console.log("got", response);
+          return response.data;
+        }
+
+Callbacks Vs Async/Await
+    Callbacks are what we’ve used for event handlers and timers
+    But they’re tricky to nest or do other complex things
+    async/await makes it easier to handle chains of requests
+    Modern libraries like Axios return “promises”, which you await
+
+Axios API
+    .get
+        axios.get(url, [config])
+        config is an optional object many Axios methods use
+        It hold specific configuration for what you need.
+    .post
+        Similar to axios.get, but uses a POST request
+        axios.post(url, [data,] [config])
+
+JSON
+    JSON is a string that looks like a JS object
+    Most APIs use JSON to communicate
+    By default, Axios recognizes JSON response & turns into JS object
+    By default, Axios sends POST data as JSON
+    JavaScript comes with a global JSON object which can convert strings of JSON into JavaScript objects, and vice versa.
+    These methods are JSON.stringify (object -> JSON) and JSON.parse (JSON -> object).

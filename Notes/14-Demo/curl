@@ -1,0 +1,20 @@
+HTML return
+    curl https://en-wikipedia.org/wiki/Asahish%C5%8D_K%C5%8Dta
+    curl http://open-notify.org/Open-Notify-API/ISS-Location-Now/
+    curl https://cat-fact.herokuapp.com
+
+JSON
+    curl api.open-notify.org/iss-now.json
+    curl https://cat-fact.herokuapp.com/facts
+    curl https://cat-fact.herokuapp.com/facts/random
+    curl https://ghibliapi.herokuapp.com/films
+    curl https://ghibliapi.herokuapp.com/vehicles
+Query String (JSON return)
+    curl https://cat-fact.herokuapp.com/facts/random?amount=2
+    curl https://cat-fact.herokuapp.com/facts/random?animal_type=dog
+    curl https://ghibliapi.herokuapp.com/vehicles?limit=2
+Using Endpoint Variables
+    curl https://cat-fact.herokuapp.com/facts/591f98803b90f7150a19c229
+
+
+

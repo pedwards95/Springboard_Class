@@ -1,0 +1,47 @@
+How Web Works Exercise
+
+Part One: Solidify Terminology
+In your own terms, define the following terms:
+
+What is HTTP?
+    Hyper Text Protocol is a message and data transfer system that is used to communicate between computers and servers. It defines the rules of the two endpoint's communication,
+    and how they can interact with each other, as well as the form of information to expect.
+What is a URL?
+    Uniform Resource Locator is the address for an internet resource. It is often text that is parsed into an IPv4 or IPv6. That number is used as the identifier and locator when
+    sending requests and getting replies between machines.
+What is DNS?
+    Domain Name System is like the phonebook for the internet. When a URL is parse into the location identifier, the DNS is where you can actually look up the physical wires
+    that the information need to travel to get to their destination.
+What is a query string?
+    This is extra information or data that is sent with a request. Usually this will impact the response that you receive back, but not always. It follows a '?' after the url,
+    and then can be some sort of variable, like key=value .
+What are two HTTP verbs and how are they different?
+    GET and POST are the most common HTTP verbs. GET retrieves information and POST sends information. You can also use GET to send info, however the info is included in
+    the url as a query string. POST can also receive something back, but it is usually just a confirmation of receipt. Information or data sent with POST is included in
+    the body of the request.
+What is an HTTP request?
+    An HTTP request is communication sent as the initiator of an interaction between two computers. It can often be seen as a user/server relationship, where the user send the
+    request. HTTP verbs are used for these requests.
+What is an HTTP response?
+    An HTTP response is the reply given from the receiver of an interaction. This is most commonly the server side of a user/server relationship. HTTP responses come in the
+    form of response codes, ranging from 100 to 599.
+What is an HTTP header? Give a couple examples of request and response headers you have seen.
+    An HTTP header contains metadata about the message. It can define content, language, expected response, endpoints, and more.
+    Some examples of request headers are: Accept, Host, Accept-Language
+    Some examples of response headers are: Content-Type, Date, Access-Control-Allow-Origin
+What are the processes that happen when you type “http://somesite.com/some/page.html” into a browser?
+    1. Your browser parses the name into an IP address using DNS
+    2. Your browser makes a request to that IP address, including headers
+    3. The server sends a response
+    4. The browser makes a DOM from that HTML, and repeats steps 1-4 for any other resources needed
+    5. The page is rendered for your viewing and interaction
+
+
+
+Part Two: Practice Tools
+    1. Using curl, make a GET request to the icanhazdadjoke.com API to find all jokes involving the word “pirate”
+        curl -H "Accept: application/json" https://icanhazdadjoke.com/search?term=pirate
+    2. Use dig to find what the IP address is for icanhazdadjoke.com
+        dig icanhazdadjoke.com
+    3. Make a simple web page and serve it using python3 -m http.server. Visit the page in a browser.
+        ok
