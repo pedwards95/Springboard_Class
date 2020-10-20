@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hack or Snooze</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+  <nav>
+    <b><a class="nav-link navbar-brand" href="#" id="nav-all">Hack or Snooze</a></b>
+    <b><a class="nav-link nav-name" href="#" id="nav-all" style="display:none"></a></b>
+    <a class="nav-link nav-right" href="#" id="nav-login">login/create user</a>
+    <span class="nav-link nav-right" style="display: none;" id="nav-welcome">
+      <a href="#" id="nav-user-profile">User Profile</a>
+      <a class="nav-link" href="#" id="nav-create-story">Create a Story</a>
+      <a id="nav-logout" href="#">
+        <small>(logout)</small>
+      </a>
+    </span>
+  </nav>
+  <header id='alert-box' class='hidden'>
+
+  </header>
+
+  <section class="articles-container container">
+    <form action="" class="hidden" id="submit-form">
+      <div>
+        <label for="author">author</label>
+        <input id="author" required type="text" placeholder="author name">
+      </div>
+      <div>
+        <label for="title">title</label>
+        <input id="title" required type="text" placeholder="article title">
+      </div>
+      <div>
+        <label for="url">url</label>
+        <input id="url" required type="url" placeholder="article url">
+      </div>
+      <button type="submit">submit</button>
+      <hr>
+    </form>
+    <article id="all-articles">
+      <hr>
+      <h4>All Articles</h4>
+      <hr>
+      <ol id="all-articles-list" class="articles-list">
+        <h3>Loading...</h3>
+      </ol>
+    </article>
+    <article id="favorited-articles" class="hidden">
+      <hr>
+      <h4>Favorites</h4>
+      <hr>
+      <ul id="favorited-articles-list" class="articles-list">
+      </ul>
+    </article>
+    <article>
+      <ul id="filtered-articles" class="hidden articles-list">
+      </ul>
+    </article>
+  </section>
+
+  <section class="edit-article-container container">
+    <form action="#" id="edit-article-form" class="hidden" method="post">
+      <h4>Article Information</h4>
+      <div class="edit-input" id="edit-title-input">
+        <label for="edit-title">Title</label>
+        <input id="edit-title" type="text">
+      </div>
+      <div class="edit-input" id="edit-author-input">
+        <label for="edit-author">Author</label>
+        <input id="edit-author" type="text">
+      </div>
+      <div class="edit-input" id="edit-url-input">
+        <label for="edit-url">URL</label>
+        <input id="edit-url" type="text">
+      </div>
+      <div class="edit-input">
+        <input type='hidden' id='editing-this-article-id' value=''>
+      </div>
+        <button type="submit">Change</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="account-forms-container container">
+    <form action="#" id="login-form" class="account-form hidden" method="post">
+      <h4>Login</h4>
+      <div class="login-input" id="login-username-input">
+        <label for="login-username">Username</label>
+        <input id="login-username" type="text">
+      </div>
+      <div class="login-input" id="login-password-input">
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password">
+      </div>
+      <button type="submit">Login</button>
+      <hr>
+    </form>
+
+    <form action="#" id="create-account-form" class="account-form hidden" method="post">
+      <h4>Create Account</h4>
+      <div class="login-input" id="create-name-input">
+        <label for="create-account-name">Name</label>
+        <input id="create-account-name" type="text">
+      </div>
+      <div class="login-input" id="create-username-input">
+        <label for="create-account-username">Username</label>
+        <input id="create-account-username" type="text">
+      </div>
+      <div class="login-input" id="create-password-input">
+        <label for="create-account-password">Password</label>
+        <input id="create-account-password" type="password">
+      </div>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <form action="#" id="create-story-form" class="story-form hidden" method="post">
+      <h4>Create Story</h4>
+      <div class="story-input" id="story-title-input">
+        <label for="story-title">Story Title</label>
+        <input id="story-title" type="text">
+      </div>
+      <div class="story-input" id="story-author-input">
+        <label for="story-author">Story Author</label>
+        <input id="story-author" type="text">
+      </div>
+      <div class="story-input" id ="story-url-input">
+        <label for="story-url">Story URL</label>
+        <input id="story-url" type="text">
+      </div>
+      <button id='story-submit'>Create Story!</button>
+      <button type = 'reset' id='story-cancel'>Cancel</button>
+      <hr>
+    </form>
+  </section>
+
+  <section id="user-profile" class="container" style="display:none">
+    <h4>User Profile Info</h4>
+    <section>
+      <div id="profile-name">Name:</div>
+      <div id="profile-username">Username:</div>
+      <div id="profile-password">Password:</div>
+      <div id="profile-account-date">Account Created:</div>
+    </section>
+  </section>
+  <section class="articles-container container">
+    <article id="my-articles" class="hidden">
+      <h4>Your Articles</h4>
+      <ul id="my-articles-list" class="articles-list">
+      </ul>
+    </article>
+  </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="api-classes.js"></script>
+<script src="ui.js"></script>
+
+</html>
