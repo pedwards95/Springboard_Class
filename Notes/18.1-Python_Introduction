@@ -1,0 +1,39 @@
+Introduction to Python
+    “high level”: express concepts at a high level (a little more than JS)
+    “dynamic”: can change variable types, make new functions in your code, etc
+    runs on servers (but not in a browser)
+    particularly used for data science, machine learning, making servers, etc
+
+Python Versions
+    Python 2
+        Latest is 2.7
+        What some people still use
+        What comes by default on OSX
+    Python 3
+        Latest is 3.7
+        Slightly different language & syntax
+Installing Python
+    $ brew install python
+
+    $ which python3
+Install other Python utility: ipython:
+    $ brew install ipython
+
+    $ which ipython
+
+Interactive Python
+    IPython is a program for interactive exploring of Python
+    $ ipython
+    CMD+D to quit
+
+SEE DEMO APP (APP.PY IN 18-DEMO/INTRO)
+
+You’ll notice many objects provide a lot of methods that have names starting and ending with double-underscores
+(Python programmers often call these “special methods” or “dunder [for ‘double-underscore’] methods”.
+
+These aren’t methods you call directly (ie, you wouldn’t ever say mylist.__add__()) — instead, these work behind-the-scenes to support other operations of the object.
+
+Generally, you can ignore them when examining an object.
+
+help()
+“Show me help about how to use this object”
