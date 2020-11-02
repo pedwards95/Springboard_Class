@@ -1,0 +1,248 @@
+What is IIS used for?
+    Stands for "Internet Information Services." IIS is a web server software package designed for Windows Server.
+    It is used for hosting websites and other content on the Web.
+    Internet Information Services (IIS) is a flexible, general-purpose web server from Microsoft that runs on Windows systems to serve requested HTML pages or files.
+    An IIS web server accepts requests from remote client computers and returns the appropriate response.
+APIM
+    API Management (APIM) is a way to create consistent and modern API gateways for existing back-end services.
+    API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
+    You can use Azure API Management to take any backend and launch a full-fledged API program based on it.
+ISV
+    independent software vendor (ISV) is a tech industry term used by Microsoft and other companies to describe individuals and organizations who develop,
+      market and sell software that runs on third-party software and hardware platforms, including Microsoft's
+API
+    An application programming interface (API) is a computing interface which defines interactions between multiple software intermediaries.
+    It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow, etc.
+
+The system is made up of the following components:
+    The API gateway is the endpoint that:
+        Accepts API calls and routes them to your backends.
+        Verifies API keys, JWT tokens, certificates, and other credentials.
+        Enforces usage quotas and rate limits.
+        Transforms your API on the fly without code modifications.
+        Caches backend responses where set up.
+        Logs call metadata for analytics purposes.
+    The Azure portal is the administrative interface where you set up your API program. Use it to:
+        Define or import API schema.
+        Package APIs into products.
+        Set up policies like quotas or transformations on the APIs.
+        Get insights from analytics.
+        Manage users.
+    The Developer portal serves as the main web presence for developers, where they can:
+        Read API documentation.
+        Try out an API via the interactive console.
+        Create an account and subscribe to get API keys.
+        Access analytics on their own usage.
+
+SOAP
+    SOAP is a messaging protocol specification for exchanging structured information in the implementation of web services in computer networks.
+    SOAP can extend HTTP for XML messaging.
+Products
+    Products are how APIs are surfaced to developers.
+    Products in API Management have one or more APIs, and are configured with a title, description, and terms of use.
+    Products can be Open or Protected.
+    Protected products must be subscribed to before they can be used, while open products can be used without a subscription.
+Groups
+    Groups are used to manage the visibility of products to developers.
+    Products grant visibility to groups, and developers can view and subscribe to the products that are visible to the groups in which they belong.
+Policies
+    Policies are a powerful capability of API Management that allow the Azure portal to change the behavior of the API through configuration.
+    Policies are a collection of statements that are executed sequentially on the request or response of an API.
+    Popular statements include format conversion from XML to JSON and call rate limiting to restrict the number of incoming calls from a developer,
+      and many other policies are available.
+Developer Portal
+    The developer portal is where developers can learn about your APIs, view and call operations, and subscribe to products.
+    Prospective customers can visit the developer portal, view APIs and operations, and sign up.
+    The URL for your developer portal is located on the dashboard in the Azure portal for your API Management service instance.
+Kubernetes Services and APIs
+    In a Kubernetes cluster, containers are deployed in Pods, which are ephemeral and have a lifecycle.
+    When a worker node dies, the Pods running on the node are lost.
+    Therefore, the IP address of a Pod can change anytime. We cannot rely on it to communicate with the pod.
+    To solve this problem, Kubernetes introduced the concept of Services.
+        A Kubernetes Service is an abstraction layer which defines a logic group of Pods and enables external traffic exposure, load balancing and service discovery for those Pods.
+Deploy API Management in front of AKS
+    Option 1: Expose Services publicly
+        Services in an AKS cluster can be exposed publicly using Service types of NodePort, LoadBalancer, or ExternalName.
+        In this case, Services are accessible directly from public internet.
+        After deploying API Management in front of the cluster, we need to ensure all inbound traffic goes through API Management by applying authentication in the microservices.
+        For instance, API Management can include an access token in each request made to the cluster.
+        Each microservice is responsible for validating the token before processing the request.
+        This might be the easiest option to deploy API Management in front of AKS, especially if you already have authentication logic implemented in your microservices.
+    Option 2: Install an Ingress Controller
+         If an API Management instance does not reside in the cluster VNet, Mutual TLS authentication (mTLS) is a robust way of ensuring the traffic is secure and trusted in
+           both directions between an API Management instance and an AKS cluster.
+        Mutual TLS authentication is natively supported by API Management and can be enabled in Kubernetes by installing an Ingress Controller
+        Authentication will be performed in the Ingress Controller, which simplifies the microservices.
+        Additionally, you can add the IP addresses of API Management to the allowed list by Ingress to make sure only API Management has access to the cluster.
+    Option 3: Deploy APIM inside the cluster VNet
+TLS
+    Transport Layer Security, are cryptographic protocols designed to provide communications security over a computer network.
+Azure CLI
+    Use Azure Cloud Shell
+        Azure hosts Azure Cloud Shell, an interactive shell environment that you can use through your browser.
+        You can use either Bash or PowerShell with Cloud Shell to work with Azure services.
+High Availability
+    Refers to a set of technologies that minimize IT disruptions by providing business continuity of IT services through redundant, fault-tolerant, or
+      failover-protected components inside the same data center.
+    In our case, the data center resides within one Azure region.
+Scalability
+    Scaling is adaptability of the system to the changed amount of workload or traffic to the web application.
+    One of the great features of Azure service is its ability to auto scale according to the demands of the application usage.
+    This is because the instance is created each time a web app is deployed.
+Elasticity
+    Elastic computing is the ability to quickly expand or decrease computer processing, memory, and storage resources to meet changing demands without worrying about capacity
+      planning and engineering for peak usage.
+Scalability vs Elasticity
+    The purpose of elasticity is to match the resources allocated with actual amount of resources needed at any given point in time.
+    Scalability handles the changing needs of an application within the confines of the infrastructure via statically adding or removing resources to meet applications demands
+      if needed.
+Agility
+    The ability to adapt and respond rapidly to market changes
+    The opportunity to innovate and disrupt your internal processes effectively
+    A culture that is receptive to change, and new ideas and processes
+Fault Tolerance
+    Fault tolerance is the property that enables a system to continue operating properly in the event of the failure of (or one or more faults within) some of its components.
+    If its operating quality decreases at all, the decrease is proportional to the severity of the failure, as compared to a naively designed system,
+      in which even a small failure can cause total breakdown.
+Disaster Recovery
+    Site Recovery is a native disaster recovery as a service (DRaaS), and Microsoft has been recognized as a leader in DRaaS
+    As a disaster recovery platform, it makes it possible for Azure Virtual Machines, Hyper-V, physical on-prem systems, and VMWare to failover to and successfully failback once
+      the disaster has been resolved.
+    A near-constant data replication process makes sure copies are in sync.
+
+
+Infrastructure-as-a-Service (IaaS)
+    Infrastructure as a service are online services that provide high-level APIs used to dereference various low-level details of underlying network infrastructure like physical
+      computing resources, location, data partitioning, scaling, security, backup etc.
+    Servers and storage, Networking firewalls/security, Data center physical plant/building
+    Typical things businesses do with IaaS include:
+        Test and development.
+            Teams can quickly set up and dismantle test and development environments, bringing new applications to market faster.
+            IaaS makes it quick and economical to scale up dev-test environments up and down.
+        Website hosting.
+            Running websites using IaaS can be less expensive than traditional web hosting.
+        Storage, backup, and recovery.
+            Organizations avoid the capital outlay for storage and complexity of storage management, which typically requires a skilled staff to manage data and meet legal and
+              compliance requirements.
+            IaaS is useful for handling unpredictable demand and steadily growing storage needs.
+            It can also simplify planning and management of backup and recovery systems.
+        Web apps.
+            IaaS provides all the infrastructure to support web apps, including storage, web and application servers, and networking resources.
+            Organizations can quickly deploy web apps on IaaS and easily scale infrastructure up and down when demand for the apps is unpredictable.
+        High-performance computing.
+            High-performance computing (HPC) on supercomputers, computer grids, or computer clusters helps solve complex problems involving millions of variables or calculations.
+            Examples include earthquake and protein folding simulations, climate and weather predictions, financial modeling, and evaluating product designs.
+        Big data analysis.
+            Big data is a popular term for massive data sets that contain potentially valuable patterns, trends, and associations.
+            Mining data sets to locate or tease out these hidden patterns requires a huge amount of processing power, which IaaS economically provides.
+Platform-as-a-Service(PaaS)
+    Platform as a service is a category of cloud computing services that provides a platform allowing customers to develop, run, and manage applications without the complexity of
+      building and maintaining the infrastructure typically associated with developing and launching an app.
+    Like IaaS, PaaS includes infrastructure—servers, storage, and networking—but also middleware, development tools, business intelligence (BI) services,
+      database management systems, and more.
+    PaaS is designed to support the complete web application lifecycle: building, testing, deploying, managing, and updating.
+    Includes:
+        Development tools
+        database management
+        business analytics
+        Operating systems
+Software-as-a-Service (SaaS)
+    Software as a service is a software licensing and delivery model in which software is licensed on a subscription basis and is centrally hosted.
+    It is sometimes referred to as "on-demand software"
+    Common examples are email, calendaring, and office tools
+    You rent the use of an app for your organization, and your users connect to it over the Internet, usually with a web browser.
+    Includes:
+        Hosted applications/apps
+Public Cloud
+    Public clouds are the most common type of cloud computing deployment.
+    The cloud resources (like servers and storage) are owned and operated by a third-party cloud service provider and delivered over the internet.
+    With a public cloud, all hardware, software, and other supporting infrastructure are owned and managed by the cloud provider.
+    Microsoft Azure is an example of a public cloud.
+Private Cloud
+    A private cloud consists of cloud computing resources used exclusively by one business or organization.
+    The private cloud can be physically located at your organization’s on-site datacenter, or it can be hosted by a third-party service provider.
+    But in a private cloud, the services and infrastructure are always maintained on a private network and the hardware and software are dedicated solely to your organization.
+Hybrid Cloud
+    A hybrid cloud is a type of cloud computing that combines on-premises infrastructure—or a private cloud—with a public cloud.
+    Hybrid clouds allow data and apps to move between the two environments.
+
+products available for Compute
+    Virtual Machines
+    App Services
+    Azure Container Instances (ACI)
+    Azure Kubernetes Service (AKS)
+products available for Networking
+    Virtual Network
+        Azure Virtual Network (VNet) is the fundamental building block for your private network in Azure.
+        VNet enables many types of Azure resources, such as Azure Virtual Machines (VM), to securely communicate with each other, the internet, and on-premises networks.
+        VNet is similar to a traditional network that you'd operate in your own data center, but brings with it additional benefits of Azure's infrastructure such as scale,
+          availability, and isolation.
+    Load Balancer
+        An Azure load balancer provides high availability by distributing incoming traffic among healthy VMs.
+    VPN Gateway
+        A VPN gateway is a specific type of virtual network gateway that is used to send encrypted traffic between an Azure virtual network and an on-premises location over
+          the public Internet.
+    Content Delivery Network
+        Azure Content Delivery Network (CDN) lets you reduce load times, save bandwidth, and speed responsiveness—whether you’re developing or managing websites or mobile apps,
+          or encoding and distributing streaming media, gaming software, firmware updates, or IoT endpoints.
+products available for Storage
+    Blob Storage
+        A massively scalable object store for text and binary data
+    Disk Storage
+        Block-level storage volumes for Azure VMs.
+    File Storage
+        Managed file shares for cloud or on-premises deployments.
+    Archive Storage
+        long term or backup data storage
+products available for Databases
+    Cosmos DB
+        Azure Cosmos DB is a fully managed NoSQL database service for modern app development.
+    Azure SQL Database
+    Azure Database for MySQL
+    Azure Database for PostgreSQL
+    Azure Database Migration service
+Azure Marketplace and its usage scenarios
+    Azure Marketplace includes IT and developer solutions that are built on Azure or used within Azure subscriptions themselves.
+Internet of Things
+    Azure IoT is a collection of managed and platform services across edge and cloud that connect, monitor, and control billions of IoT assets.
+    General, The Internet of things (IoT) describes the network of physical objects—“things”—that are embedded with sensors, software, and other technologies for the purpose of
+      connecting and exchanging data with other devices and systems over the Internet.
+REST guidelines
+    It is an architecture style for designing loosely coupled applications over HTTP, that is often used in the development of web services.
+    Uniform interface
+    Client–server
+    Stateless
+    Cacheable
+    Layered system
+    Code on demand (optional)
+Node.js
+    Node.js is an open source server environment
+    Node.js uses asynchronous programming!
+    Node.js can generate dynamic page content
+    Node.js can create, open, read, write, delete, and close files on the server
+    Node.js can collect form data
+    Node.js can add, delete, modify data in your database
+Access Modifiers
+    public: The type or member can be accessed by any other code in the same assembly or another assembly that references it.
+    private: The type or member can be accessed only by code in the same class or struct.
+    protected: The type or member can be accessed only by code in the same class, or in a class that is derived from that class.
+    internal: The type or member can be accessed by any code in the same assembly, but not from another assembly.
+HTTP Methods
+    GET
+        The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+    HEAD
+        The HEAD method asks for a response identical to that of a GET request, but without the response body.
+    POST
+        The POST method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.
+    PUT
+        The PUT method replaces all current representations of the target resource with the request payload.
+    DELETE
+        The DELETE method deletes the specified resource.
+    CONNECT
+        The CONNECT method establishes a tunnel to the server identified by the target resource.
+    OPTIONS
+        The OPTIONS method is used to describe the communication options for the target resource.
+    TRACE
+        The TRACE method performs a message loop-back test along the path to the target resource.
+    PATCH
+        The PATCH method is used to apply partial modifications to a resource.
