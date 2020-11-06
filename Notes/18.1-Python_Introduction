@@ -18,6 +18,7 @@ Installing Python
     $ which python3
 Install other Python utility: ipython:
     $ brew install ipython
+    # on 2nd try I had to use python -m pip install ipython
 
     $ which ipython
 
