@@ -1,0 +1,55 @@
+Python Object Orientation
+    Self
+        self is similar to this
+        this is a bit magical: it automatically gets created
+        self is explicit: you must list it as the first argument of methods
+
+Inheritance
+    class ColoredTriangle(Triangle):
+        """Triangle that has a color."""
+
+        def __init__(self, a, b, color):
+            # get parent class [`super()`], call its `__init__()`
+            super().__init__(a, b)
+
+            self.color = color
+
+        def describe(self):
+            msg = super().describe() + f" I am {self.color}"
+
+Super
+    Like in JS, super finds parent class:
+
+Documenting Classes
+    As always, good style to have comment explaining purpose of class & methods:
+        class Triangle:
+            "Right triangle."
+
+            def __init__(self, a, b):
+                "Create triangle from a and b sides."
+                self.a = a
+                self.b = b
+
+            def get_hypotenuse(self):
+                "Get hypotenuse (length of 3rd side)."
+                return math.sqrt(self.a ** 2 + self.b ** 2)
+
+            def get_area(self):
+                "Get area of triangle."
+                return (self.a * self.b) / 2
+
+Documenting Instance
+    When you print an instance/examine in Python shell, often not helpful:
+        >>> tri = Triangle(3, 4)
+
+        >>> tri
+        <__main__.Triangle object at 0x1012a6358>
+    Would be nicer to see values for a and b
+    We can do this by making a __repr__ (representation) method:
+        def __repr__(self):
+            return f"<Triangle a={self.a} b={self.b}>"
+
+        >>> tri = Triangle(3, 4)
+
+        >>> tri
+        <Triangle a=3 b=4>
