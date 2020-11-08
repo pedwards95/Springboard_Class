@@ -1,0 +1,119 @@
+What is a Web Server?
+    A program that’s running on a machine and waiting for a web request.
+    Note: A web server is a technology that can process requests and issue responses via HTTP, a protocol used to distribute information on the world wide web. 
+    Though it’s also used to refer to computer systems and even internet “appliances,” we’ll use web server to refer to the software running on a machine that’s waiting to 
+      respond to HTTP requests.
+    The server then responds with the exact HTML text for that page:
+
+Web Application
+    The ability to start a server in “listening” for requests, and then issue responses:
+
+Flask is a Web Framework
+    Like a library, but bigger and more opinionated
+    Usage is similar to the Python Standard Library.
+
+Using the Python Standard Library
+    from random import choice, randint
+ 
+Using Flask
+    from flask import Flask, request
+
+Flask Apps
+    Installing Flask
+        $ python3 -m venv venv
+        $ source venv/bin/activate
+        (venv)$ pip3 install flask
+
+Need to create a “flask application”:
+    from flask import Flask
+    app = Flask(__name__)
+
+Running Flask App
+    (venv) $ flask run
+If your Flask app file isn’t called app:
+    (venv) $ FLASK_APP=app.py flask run
+
+
+    (venv) $ FLASK_ENV=development flask run
+
+Adding Routes
+    A function that returns web response is called a view
+        @app.route('/hello')
+        def say_hello():
+            """Return simple "Hello" Greeting."""
+
+            html = "<html><body><h1>Hello</h1></body></html>"
+            return html
+
+    @app.route('/hello') is a Python “decorator”
+        “/hello” in the decorator maps directly to the URL the user requested
+        Now we can get to this at http://localhost:5000/hello
+
+
+GET and POST
+    @app.route("/search")
+    def search():
+        """Handle GET requests like /search?term=fun"""
+
+        term = request.args["term"]
+        return f"<h1>Searching for {term}</h1>"
+    request.args is a dict-like object of query parameters.
+
+Handling POST Requests
+    By default, a route only responds to GET requests
+    To accept POST requests, must specify that:
+
+        @app.route("/add-comment")
+        def add_comment_form():
+            """Show form for adding a comment."""
+
+            return """
+              <form method="POST">
+                <input name="comment">
+                <button>Submit</button>
+              </form>
+              """
+
+        @app.route("/add-comment", methods=["POST"])
+        def add_comment():
+            """Handle adding comment."""
+
+            comment = request.form["comment"]
+
+            # TODO: save that into a database!
+
+            return f'<h1>Received "{comment}".</h1>'
+    request.form is a dict-like object of POST parameters.
+
+
+Variables in a URL
+    @app.route('/user/<username>')
+    def show_user_profile(username):
+        """Show user profile for user."""
+
+        name = USERS[username]
+        return f"<h1>Profile for {name}</h1>"
+
+    View function must have same var_name as parameter
+
+Can also specify int variable:
+    @app.route('/post/<int:post_id>')
+    def show_post(post_id):
+        """Show post with given integer id."""
+
+        print("post_id is a ", type(post_id))
+
+        post = POSTS[post_id]
+
+        return f"<h1>Post #{post_id}</h1><p>{post}</p>"
+
+    Converts to integer when calling function
+
+Which Should I Use?
+    URL Parameter
+        /shop/<toy>
+    Feels more like “subject of page”
+ 
+    Query Parameter
+        /shop?toy=elmo
+    Feels more like “extra info about page”
