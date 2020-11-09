@@ -1,0 +1,109 @@
+Views
+    Views are functions that return a string (a string of HTML)
+
+Routes
+    Routes define the URL that will run a view function.
+    They are declared by using decorators.
+
+Templates
+    Allows your responses to be dynamically created
+    Can use variables passed from your views
+    For loops, if/else statements
+    Can inherit from other templates to minimize repetition
+
+Jinja
+    Jinja is a popular template system for Python, used by Flask.
+        There are many template systems for Python.
+        Jinja is a particularly popular one.
+        Django has its own template system, which served as an inspiration for Jinja.
+
+Templates Directory
+    Your templates directory lives under your project directory. Flask knows to look for them there.
+        my-project-directory/
+          venv/
+          app.py
+          templates/
+            hello.html
+
+ ( SEE DEMO CODE !!!)
+
+Flask Debug Toolbar
+    Ultra-useful add-on for Flask that shows, in browser, details about app.
+        (venv) $ pip3 install flask-debugtoolbar
+
+    from flask import Flask, request, render_template
+    from flask_debugtoolbar import DebugToolbarExtension
+
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = "oh-so-secret"
+
+    debug = DebugToolbarExtension(app)
+
+    ... # rest of file continues
+
+
+    For now, that secret key doesn’t really have to be something secret (it’s fine to check this file into your GitHub, and you can use any string for the SECRET_KEY.)
+    Later, when we talk about security & deployment, we’ll talk about when and how to actually keep this secret.
+
+Dynamic Templates
+    Jinja will replace things like {{ msg }} with value of msg passed when rendering:
+
+ (SEE DEMO CODE !!)
+
+Template Inheritance
+    Different pages on the same site are often 95% the same.
+    Make a base.html that will hold all the repetitive stuff
+    “Extend” that base template in your other pages
+    Substitute blocks in your extended pages
+    Sample Base Template
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+          <link rel="stylesheet" href="/static/css/styles.css">
+          <script src="http://unpkg.com/jquery"></script>
+        </head>
+        <body>
+          <h1>Our Site</h1>
+          {% block content %}BODY CONTENT GOES HERE{% endblock %}
+          <footer>Copyright by Whiskey.</footer>
+        </body>
+        </html>
+    Page Using Template
+        {% block BLOCKNAME %} ... {% endblock %}
+
+        templates/my-page.html
+        {% extends 'base.html' %}
+
+        {% block title %}My awesome page title{% endblock %}
+
+        {% block content %}
+
+          <h2>I'm a header!</h2>
+          <p>I'm a paragraph!</p>
+
+        {% endblock %}
+Where Other Project Files Go
+    Do I Need Routes for CSS (or JS, etc)?
+        @app.route("my-css.css")
+        def my_css():
+            return """
+               b { color: red }
+               ...
+             """
+    No! That would be tedious — plus, everyone gets the same CSS
+
+Static Files: CSS and JS
+    In static/ directory:
+        my-project-directory/
+          venv/
+          app.py
+          templates/
+            hello.html
+          static/
+            my-css.css
+            my-script.js
+    Find files like:
+        <link rel="stylesheet" href="/static/my-css.css">
+    The static directory is where you put files that don’t change, unlike templates, which are parsed.
+    The static directory can be divided in to the types of files that it contains: js for javascript, css for css files, img for images, etc., but that isn’t necessary.
