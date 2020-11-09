@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %}Survey Home{% endblock %} {% block
+content %}
+
+<form action="/questions/{{num}}" method="POST">
+	<div>{{question.question}}</div>
+	<select id="choice" name="choice">
+		{% for option in question.choices %}
+        <option value="{{option}}">{{option}}</li>
+        {% endfor %}
+    </select>
+    <button type="submit" class="submit-button">Submit</button>
+</form>
+
+{% endblock %}

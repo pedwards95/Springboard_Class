@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %}Survey Home{% endblock %} {% block
+content %}
+
+<h1>Thanks for taking the survey!</h1>
+<h4>It is now safe to close the window.</h4>
+<div>
+	<p>Your Answers:</p>
+	<ul>
+		{% for answer in answers %}
+		<li>{{answer}}</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

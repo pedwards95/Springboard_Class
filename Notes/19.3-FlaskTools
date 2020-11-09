@@ -1,0 +1,47 @@
+Flask Debug Toolbar & Redirects
+    The Debug Toolbar makes redirects explicit
+    If you don’t want this, you can turn it off:
+        app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
+Message Flashing
+    Often you want to provide feedback at “the next page user sees”
+        from flask import flash
+        flash("Message for user!")
+
+Returning JSON
+    JSON is just a string — so you don’t need to do anything special
+        return '{"name": "Whiskey", "cute": "hella"}'
+    Two considerations:
+        It’s finicky to hand-write JSON and get it right
+        It’s sometimes helpful to send header to browser that “this is JSON”
+            return jsonify(info)
+
+Flask Debugging
+    as always print()
+        (appears in terminal)
+    Flask Debug Toolbar
+        Get an error? You can debug on the error page!
+Debugging Errors
+    Click the black “Terminal” symbol in a traceback
+    You’ll need to enter “PIN code” (printed out to terminal at start)
+    That will give you a Python interpreter right there!
+    Python includes a built-in debugger, pdb
+        To add a breakpoint to your code:
+            def my_function():
+                ...
+                import pdb
+                pdb.set_trace()
+                ...
+    When you hit that set_trace(), Python will stop so you can debug this
+Debugger Basics
+    Key	Command
+        ?	Get help
+        l	List code where I am
+        p	Print this expression
+        pp	Pretty print this expression
+        n	Go to next line (step over)
+        s	Step into function call
+        r	Return from function call
+        c	Continue to next breakpoint
+        w	Print “frame” (where am I?)
+        q	Quit debugger
