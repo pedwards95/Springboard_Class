@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block title %}Boggle Game Over{% endblock %} {%
+block content %}
+<h2>Time's Up!</h2>
+<h3>
+	Your Score was {{session.get("points",0)}}
+	<button class="menu-select" id="menu-back">Back to Menu</button>
+</h3>
+{% endblock %}

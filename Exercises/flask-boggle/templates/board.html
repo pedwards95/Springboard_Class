@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %}Boggle Game{% endblock %} {%
+block content %}
+<div class="board-space">
+	<table id="board">
+		{% for y in board %}
+		<tr>
+			{% for x in y %}
+			<td class="board-piece">{{x}}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+<br />
+<br />
+<div class="score">
+	{% if session["points"] %}
+	<p>Score:<section id="my-points">{{session["points"]}}</section></p>
+	{% endif %}
+</div>
+<form action="" id="guess-form">
+	<label for="guess">Your Guess:</label>
+	<input type="text" name="guess" id="input-guess" />
+	<button type="submit">Submit</button>
+</form>
+<hr />
+<div>
+	Time: <span id="timer">--</span>
+</div>
+<button class="menu-select" id="menu-back">Back to Menu</button>
+{% endblock %} {% block more_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+<script src="/static/app.js"></script>
+{% endblock %}

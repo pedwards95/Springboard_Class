@@ -1,0 +1,20 @@
+#menu-back {
+	display: block;
+}
+
+.messages p {
+	padding: 1rem;
+	border-radius: 1rem;
+	font-size: 1.5rem;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.messages .success {
+	border: 2px solid green;
+	background-color: lightgreen;
+}
+
+.messages .error {
+	border: 2px solid red;
+	background-color: lightpink;
+}

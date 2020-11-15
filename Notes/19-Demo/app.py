@@ -5,6 +5,8 @@ from random import randint, choice, sample
 # python -m venv venv
 # source venv/Scripts/activate
 
+# pip install flask
+
 #if app is not named app.py, use :
 #   FLASH_APP=app_name.py flask run
 # else:
@@ -17,6 +19,10 @@ from random import randint, choice, sample
 
 # pip install flask_debugtoolbar
 # pip freeze > requirements.txt
+
+# for global env,
+# pip install python-dotenv
+# then make a .flaskenv in root directory
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "chickenzarecool"
