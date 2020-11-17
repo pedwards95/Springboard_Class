@@ -67,7 +67,7 @@ class AlgorithsTestCase(TestCase):
 # python run all tests
 #   visual interface on left hand side
 
-
+# or still      python -m unittest file_name.py
 
 # INTEGRATION TESTING
 from app import app

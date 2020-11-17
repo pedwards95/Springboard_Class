@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %}Currency Converter Home{% endblock %}
+{% block content %}
+<h1>Currency Converter</h1>
+
+<form class="currency-form" action="/convert" method="POST">
+	<label for="from-currency">From</label>
+	<input type="text" name="from-currency" />
+	<label for="to-currency">To</label>
+	<input type="text" name="to-currency" />
+	<label for="amount-currency">Amount</label>
+	<input type="number" name="amount-currency" />
+	<button type="submit">Submit</button>
+</form>
+<div class="result">{{converted_value}}</div>
+
+{% endblock %}
