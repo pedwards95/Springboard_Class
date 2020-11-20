@@ -1,0 +1,26 @@
+For this exercise, you are going to practice querying a relatively large dataset: close to 10k apps listed in the Google Play Store (data scraped mid 2018).
+
+When you get a query to work correctly, copy and paste it into the queries_playstore.sql file with a comment for which query it is.
+
+To seed your database, run the following command from within the starter code directory.
+
+$ psql < seed_playstore.sql
+This will create the database and table. You should now have a new database, called playstore, along with a single table, analytics
+
+Here are the rest of the queries you should write, phrased like your boss is asking for specific stuff:
+    x Find the app with an ID of 1880.
+    x Find the ID and app name for all apps that were last updated on August 01, 2018.
+    x Count the number of apps in each category, e.g. “Family | 1972”.
+    x Find the top 5 most-reviewed apps and the number of reviews for each.
+    x Find the app that has the most reviews with a rating greater than equal to 4.8.
+    x Find the average rating for each category ordered by the highest rated to lowest rated.
+    x Find the name, price, and rating of the most expensive app with a rating that’s less than 3.
+    x Find all apps with a min install not exceeding 50, that have a rating. Order your results by highest rated first.
+    x Find the names of all apps that are rated less than 3 with at least 10000 reviews.
+    x Find the top 10 most-reviewed apps that cost between 10 cents and a dollar.
+    x Find the most out of date app. Hint: You don’t need to do it this way, but it’s possible to do with a subquery: http://www.postgresqltutorial.com/postgresql-max-function/
+    x Find the most expensive app (the query is very similar to #11).
+    x Count all the reviews in the Google Play Store.
+    x Find all the categories that have more than 300 apps in them.
+    x Find the app that has the highest proportion of min_installs to reviews, among apps that have been installed at least 100,000 times. 
+        Display the name of the app along with the number of reviews, the min_installs, and the proportion.

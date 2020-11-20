@@ -1,0 +1,68 @@
+Key terms include:
+    RDBMS - Relational Database Management System, e.g. PostgreSQL, MySQL, Oracle
+    schema - a logical representation of a database including its tables
+    SQL - Structured Query Language, a human-readable language for querying
+    table (aka “relation”) - basically a spreadsheet, a set of columns and rows
+    column - a table attribute, e.g. “first_name”, “last_name”, or “company”
+    row - a table record with values for set for columns, e.g. “Matt, Lane, Rithm”
+
+PostgreSQL Shell
+    PostgreSQL includes psql, a terminal-based program for issuing database commands.
+        $ psql my_database_name
+        psql (10.5)
+
+        my_database_name=#
+
+Create Databases
+    Each project will have a separate database
+        $ createdb my_database_name
+    Good database names are short and straightforward, and in lower_snake_case.
+
+Where Is That Database?
+    The database is not a file in your current directory
+    It’s a bunch of files/folders elsewhere on your computer
+    These aren’t human-readable (they’re optimized for speed!)
+    Saving your project in Git won’t save your database!
+
+Seeding a Database
+    You can feed .sql scripts into the program psql:
+        $ psql < my_database.sql
+    This is often used to seed an empty database by building tables, filling in rows, or both.
+
+Backing Up a Database
+    You can also make a backup of your database by “dumping it” to a file:
+        $ pg_dump -C -c -O my_database_name > backup.sql
+    This makes a file in the current directory, backup.sql
+
+    It contains all of the commands necessary to re-create the current database when seeding.
+
+Dropping Databases
+    A database that is “dropped” is completely deleted (schema & data).
+        $ dropdb my_database_name
+
+Common Commands
+    \l — List all databases
+    \c DB_NAME — connect to DB_NAME
+    \dt —- List all tables (in current db)
+    \d TABLE_NAME — Get details about TABLE_NAME (in current db)
+    \q — Quit psql (can also type <Control-D>)
+
+SQL
+    SELECT * FROM people WHERE age > 21 AND id IS NOT NULL;
+
+Strings in SQL:
+    case-sensitive: 'Bob' not same as 'bob'
+    single-quotes, not double, around strings.
+    Commands end with a semicolon.
+    SQL keywords are conventionally written in ALL IN CAPS but not required.
+        SELECT price FROM books
+           # same as
+        select price from books
+
+Types of SQL Statements
+    DDL: Data Definition Language
+        The commands to create, modify, or delete tables, columns & databases.
+            Examples: CREATE, ALTER, DROP
+    DML: Data Manipulation Language
+        The commands to create, read, modify, or delete rows.
+            Examples: SELECT, INSERT, UPDATE, DELETE
