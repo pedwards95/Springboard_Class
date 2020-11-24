@@ -1,0 +1,120 @@
+DDL Basics
+    Creating and Dropping Databases
+        CREATE DATABASE yet_another_db;
+
+        DROP DATABASE yet_another_db;
+
+Creating Tables
+    CREATE DATABASE library;
+    \c library
+
+    CREATE TABLE books (
+      id SERIAL PRIMARY KEY,
+      title TEXT,
+      author TEXT,
+      price FLOAT,
+      page_count INTEGER,
+      publisher TEXT,
+      publication_date DATE
+    );
+
+Inspecting Tables in PostgreSQL
+    Listing the tables in the database
+        \dt
+    Listing the column names and types in a specific table
+        \d+ books
+
+Dropping Tables
+    DROP TABLE users;
+
+Column Data Types
+    Integer
+    Integer numbers
+    Float
+    Floating-point numbers (you can specify the precision)
+    Text
+    Text Strings
+    Varchar
+    Text Strings, but limited to a certain size
+    Boolean
+    True or False
+    Date
+    Date (without time)
+    Timestamp
+    Date and time
+    Serial
+        Auto-incrementing numbers (used for primary keys)
+
+Other Types
+    There are lots of other types, including specialized, less-common types for fixed-precision math (NUMERIC or DECIMAL), handling geospatial information, currency, and more!
+
+NULL
+    NULL is a special value in SQL for “unknown”.
+    It’s not the same thing as 0 or an empty string!
+    NULL values are ok when you really might have missing/unknown data
+
+Primary Keys
+    Every table should have a “primary key”, a unique way to identify rows
+
+    Primary keys must be:
+        Unique
+        Not Null
+    Primary keys should be:
+        Unchanging (it’s a pain when primary keys change)
+        Constraints
+        Constraints are a basic form of validation. The database can prevent basic types of unintended behavior.
+
+Primary Key (every table must have a unique identifier)
+Unique (prevent duplicates in the column)
+Not Null (prevent null in the column)
+Check (do a logical condition before inserting / updating)
+Foreign Key (column values must reference values in another table)
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    phone_number TEXT UNIQUE,
+    password TEXT NOT NULL,
+    account_balance FLOAT CHECK (account_balance > 0)
+);
+
+Column Manipulation
+    ALTER TABLE books ADD COLUMN in_paperback BOOLEAN;
+    ALTER TABLE books DROP COLUMN in_paperback;
+    ALTER TABLE books RENAME COLUMN page_count TO num_pages;
+
+Structuring Relational Data
+    Crow’s Foot Notation
+        Preferably, we will draw diagrams with Crow’s Foot Notation, which is a standard way to represent schemas.
+
+Best Practices
+    Normalization
+        Normalization is a database design technique which organizes tables in a manner that reduces redundancy and dependency of data.
+        It divides larger tables to smaller tables and links them using relationships.
+
+Indexing
+    A database index is a special data structure that efficiently stores column values to speed up row retrieval via SELECT and WHERE (i.e. “read”) queries.
+    For instance, if you place an index on a username column in a users table, any query using username will execute faster since fewer rows have to be scanned due to the efficient structure.
+
+Index Efficiency
+    In general, database software (including PostgreSQL) use tree-like data structures to store the data, which can retrieve values in 
+     logarithmic time O(lg(N)) instead of linear O(N) time.
+        Translation: If we have 1,000,000 rows and are looking for a single column value, instead of examining every row, we can examine approximately log2(1000000) ≈ 20 rows to get our answer, which is an incredible improvement!
+
+Why Not Index Everything?
+    There is a tradeoff with indexing! For every indexed column, a copy of that column’s data has to be stored as a tree, which can take up a lot of space.
+    Also, every INSERT and UPDATE query becomes more expensive, since data in both the regular table AND the index have to be dealt with.
+
+How to Create an Index in PostgreSQL
+    Indexing is part of DDL, but indexes can be created or dropped at any time. 
+    The more records in the database at the time of creation, the slower the indexing process will be.
+        CREATE INDEX index_name ON table_name (column_name);
+    You can also create a multi-column index, which is useful if you are constantly querying by two fields at once (e.g. first_name and last_name):
+        CREATE INDEX index_name ON table_name (column1_name, column2_name);
+
+How to Drop an Index in PostgreSQL
+    DROP INDEX full_name;
+
+When to Index
+    Indexes are used in every PostgreSQL table by default on the primary key column.
+    In general, if you are building an application that is more read-heavy than write-heavy, indexes are your friend and can be safely placed on columns that are used frequently 
+      in queries to speed up performance.
+    However, there are other index types besides the default that may be more efficient for your data, so definitely read up on some PostgreSQL performance optimizations
