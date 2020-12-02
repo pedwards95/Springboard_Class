@@ -1,0 +1,94 @@
+SQLAlchemy ORM
+  Popular, powerful, Python-based ORM (object-relational mapping)
+  Translation service between OOP in our server language and relational data in our database
+  Can use by itself, with Flask, or other web frameworks
+
+Installing SQLAlchemy
+  Need the program that lets Python speak PostgreSQL: psycopg2
+  Need the program that provides SQLAlchemy: flask-sqlalchemy
+    $ pip install psycopg2-binary
+    $ pip install flask-sqlalchemy
+
+OO into SQL
+    (SEE DEMO FILES)!!
+
+SQLALCHEMY_DATABASE_URI - Where is your database?
+SQLALCHEMY_TRACK_MODIFICATIONS - Set this to false or SQLAlchemy will yell at you
+SQLALCHEMY_ECHO - Print all SQL statements to the terminal (helpful for debugging)
+
+Can talk to SQLite, PostgreSQL, MySQL, and more
+    You (almost) never have to change code if you change databases
+
+
+Creating the Database
+        $ ipython3
+        In [1] %run app.py
+        In [2] db.create_all()
+    Only have to do once
+    No effect if tables already exist
+
+If you change table schema
+    drop table & re-run
+
+Adding
+    >>> db.session.add(fluffy)    # required to add to database!
+    >>> db.session.commit()       # commit the transaction
+
+    You only have to use db.session.add() to add a new object once – you don’t need to keep adding it to the session each time you change it.
+
+Transactions
+    Database management systems (Postgres included) support the concept of transactions. 
+        The idea here is that you may want to update multiple parts of the database simultaneously, and if any piece of the update fails, the entire transaction fails.
+    The most common example is a bank transfer: imagine Abby is trying to send $20 to Barbara, and we want to record this fact in a database. 
+    So we deduct $20 from Abby’s account, but before we can increase Barbara’s balance by $20, there’s a power failure. 
+    In this case, the whole transaction should be cancelled. Otherwise, Abby would be out $20!
+
+    In PostgreSQL, we can begin a transaction with BEGIN TRANSACTION. 
+    Inside of our transaction, any SQL we write won’t make permanent changes to the database. 
+    If we make a change we don’t like, we can cancel the transaction with the ROLLBACK command.
+
+SQL Transaction:
+    BEGIN TRANSACTION;
+      DELETE FROM colors;
+      SELECT * FROM colors; 
+      -- no colors are left!
+    COMMIT;
+
+    SELECT * FROM colors;
+    -- Since we committed the transaction,
+    -- all of the colors are gone.
+
+Querying
+    Pet.query.all()
+        SELECT *
+        FROM pets
+    Pet.query.get(1)
+        SELECT *
+        FROM pets
+        WHERE id = 1
+    Pet.query.filter_by(species='dog').all()
+        SELECT *
+        FROM pets
+        WHERE species = 'dog'
+    Pet.query.filter(Pet.species == 'dog').all()
+    Pet.query.filter(Pet.hunger < 10).all()
+        SELECT *
+        FROM pets
+        WHERE hunger < 10
+    Pet.query.filter(Pet.hunger < 15, Pet.species == 'dog').all()
+        SELECT *
+        FROM pets
+        WHERE hunger < 15
+          AND species = 'dog'
+
+Fetching Records
+    .get(primarykey)
+        Get single record with that primary key value
+    .all()
+        Get all records as a list
+    .first()
+        Get first record or None
+    .one()
+        Get first record, error if 0 or if > 1
+    .one_or_none()
+        Get first record, error if >1, None if 0
