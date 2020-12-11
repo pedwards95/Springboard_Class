@@ -1,0 +1,16 @@
+{% extends 'user_details.html' %}
+    {% block edit_user %}
+        <form action="/user/edit/{{user.id}}" method="POST">
+            <label for="first_name">First Name: </label>
+            <input type="text" name="first_name" value={{user.first_name}}>
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name" value={{user.last_name}}>
+            <label for="img_url">Profile Image URL (optional): </label>
+            <input type="text" name="img_url" value={{user.profile_img}}>
+            <br>
+            <button type="submit">Submit Edit</button>
+        </form>
+        <form action="/user/{{user.id}}" method="GET">
+            <button type="submit">Cancel</button>
+        </form>
+    {% endblock %}

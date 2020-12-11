@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blogly - {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="/static/app.css" />
+	</head>
+	<body>
+		<h1 class="title">Blogly</h1>
+		<section class="messages">
+			{% with messages = get_flashed_messages(with_categories=true) %} {%
+			if messages %} {% for category,msg in
+			get_flashed_messages(with_categories=true) %}
+			<p class="{{category}}">{{msg}}</p>
+			{% endfor %} {% endif %} {% endwith %}
+		</section>
+
+		<div class="content">{% block content %} {% endblock %}</div>
+
+		{% block more_scripts %}{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %}{{user.first_name}} {{user.last_name}} Details{% endblock %} {% block
+    content %}
+    <img src="{{user.profile_img}}" alt="" style="width:200px;height:200px;">
+    <h1>{{user.full_name}}</h1>
+    {% block edit_user %}
+    <form action="/user/edit/{{user.id}}" method="GET">
+        <button type="submit">Edit User</button>
+    </form>
+    <form action="/user/{{user.id}}/delete" method="POST">
+        <button type="submit">Delete User</button>
+    </form>
+    <br>
+    <hr>
+    <br>
+    <h2>Posts</h2>
+    <ul>
+        {% for post in user.posts %}
+        <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+        {% endfor %}
+    </ul>
+    <form action="/user/{{user.id}}/posts/create" method="GET">
+        <button type="submit">New Post</button>
+    </form>
+    {% endblock %}
+    <br>
+    <hr>
+    <br>
+    <a href="/all_users"><button>Back to Users</button></a>
+    <a href="/home"><button>Back to Home</button></a>
+    {% endblock %}

@@ -26,8 +26,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
 
-
-
 @app.route('/')
 def list_pets():
     """Shows list of all pets in db"""

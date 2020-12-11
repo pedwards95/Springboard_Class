@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %}Post Details{% endblock %} {% block
+    content %}
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <p><i>Posted by: {{user.full_name}}</i></p>
+    <small>{{post.created_at.date().strftime("%A %B %d, %Y")}} 
+        {% if post.created_at.time().hour <= 12 %}
+            {{post.created_at.time().isoformat(timespec='minutes')}} AM
+        {% else %}
+            &nbsp;&nbsp;{{((post.created_at.time().hour - 12)|string).zfill(2)}}:{{((post.created_at.time().minute)|string).zfill(2)}} PM
+        {% endif %}
+        <br>
+        <br>
+        <br>
+    {% block edit_post %}
+        <a href="/posts/edit/{{post.id}}"><button>Edit Post</button></a>
+        <a href="/posts/{{post.id}}/delete"><button>Delete Post</button></a>
+        <a href="/user/{{user.id}}"><button>Back to User</button></a>
+    {% endblock %}
+    {% endblock %}

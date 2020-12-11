@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block
+    content %}
+    <h2>Blogly Home</h2>
+    {% for post in my_posts %}
+        <div>
+            <a href="/posts/{{post.id}}">{{post.title}}</a> <i>Posted by: {{post.poster.full_name}}</i> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<small>{{post.created_at.date().strftime("%A %B %d, %Y")}} 
+                {% if post.created_at.time().hour <= 12 %}
+                    {{post.created_at.time().isoformat(timespec='minutes')}} AM
+                {% else %}
+                    &nbsp;&nbsp;{{((post.created_at.time().hour - 12)|string).zfill(2)}}:{{((post.created_at.time().minute)|string).zfill(2)}} PM
+                {% endif %}
+            </small>
+        </div>
+    {% endfor %}
+    <br>
+    <a href="/all_users"><button type="submit">All Users</button></a>
+    {% endblock %}
