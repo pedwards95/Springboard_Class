@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block title %} Adoption Home {% endblock %} {% block
+    content %}
+    
+    <h1>All Pets</h1>
+    {% for pet in pets %}
+        <span>
+            {% if pet.photo_url %}
+                <img src="{{pet.photo_url}}" alt="" style="width:400px;height:400px;">
+            {% endif %}
+            {% if pet.available %}
+                <p></p><a href="/{{pet.id}}">{{pet.name}}</a> is available!</p>
+            {% endif %}
+        </span>
+    {% endfor %}
+    <a href="/add"><button>Add A Pet</button></a>
+    
+    {% endblock %}
