@@ -8,14 +8,18 @@
 # pip install pylint-flask
 # pip install psycopg2-binary
 # pip install flask-sqlalchemy
-# pip install pylint_flask_sqlalchemy
 # pip install pylint-sqlalchemy
+# pip install pylint_flask_sqlalchemy
+# pip install sqlalchemy-utils
 # pip install python-dotenv
 #    then make a .flaskenv in root directory
 # pip install email_validator
+
 # pip freeze > requirements.txt
 
-#   flask run
+#    flask run
+# if app is not named app.py, use :
+#    FLASK_APP=app_name.py flask run
 
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy

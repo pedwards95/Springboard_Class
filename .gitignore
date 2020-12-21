@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 instructions
+secrets.py
+/secrets.py

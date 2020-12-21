@@ -1,0 +1,93 @@
+Revewing HTTP Verbs
+    GET
+        Remains in history, can be cached/bookmarked
+        Data sent in URL, in query string
+        Repeatable
+    POST
+        Doesn’t remain in history, is not cached/bookmarked
+        Data sent in body of the request
+        Not repeatable
+When to use GET or POST?
+    Searching / Filtering? GET
+    Sending an email? POST
+    Updating a user? POST ?
+PUT / PATCH / DELETE
+    PUT
+        Update entire resource
+    PATCH
+        Update part of resource (patch it up)
+    DELETE
+        Delete resource
+
+Safety & Idempotence
+    A safe operation is one that does not change the data requested.
+    An idempotent operation can be performed many times (with same data) with the result of all calls being the same as if it was done once.
+    Idempotence refers to side-effects not all-effects or responses.
+
+REST
+    Architectural style defining constraints for creating web services
+    Includes things like: client-server model, statelessness and cacheability
+    APIs that adhere to these constraints are called RESTful APIs
+RESTful APIs
+    Usually have base url
+        eg http://api.site.com/ or http://site.com/api/
+    Have a resource after the base url
+        eg http://api.com/books or http://site.com/api/books
+    Use standard HTTP verbs (GET, POST, PUT/PATCH, DELETE)
+    Structure routes in a standardized way (“RESTful routing”)
+Resource
+    An object with a type, associated data, relationships to other resources
+    A set of methods that operate on it
+    Analogous to instance/methods in OO
+    HTTP verbs describe methods on resource
+    DELETE /cats/fluffy is same idea as fluffy.delete()
+    Not every route in a RESTful API will neccessary be around resources. 
+    For example, you may have routes to initially authenticate with the API that aren’t using a resource in the URL.
+
+
+GET /snacks
+    Returns 200 OK, with JSON describing snacks
+GET /snacks/[id]
+    Returns 200 OK, with JSON describing single snack
+POST /snacks
+    Returns 201 CREATED, with JSON describing new snack
+PUT or PATCH /snacks/[id]
+    Returns 200 OK, with JSON describing updated snack
+DELETE
+    Returns 200 OK, with JSON describing success
+
+RESTful APIs With Flask
+    Can still use Flask and Flask-SQLAlchemy
+    Will respond with JSON, not HTML
+    Won’t typically use Jinja to make JSON, just jsonify in route
+    Can’t redirect — return JSON of answer
+
+Flask jsonify
+    jsonify(thing)
+    Returns JSON of thing (usually dict, but could be list)
+    jsonify(name="Jane", age=21)
+        Returns JSON like {"name": "Jane", "age": 21}
+Limitations of JSON / jsonify
+    JSON can only represent dictionaries, lists, and primitive types
+    Cannot represent things like SQLAlchemy model instances
+    Python can’t just “turn your objects into JSON”
+    Requires a process called serialization
+Serialization
+    You can turn your instances into dictionaries or lists:
+        def serialize_dessert(dessert):
+            """Serialize a dessert SQLAlchemy obj to dictionary."""
+
+            return {
+                "id": dessert.id,
+                "name": dessert.name,
+                "calories": dessert.calories,
+            }
+
+Receiving Data in a Flask JSON API
+    If request is made with Content-Type: application/json
+        it won’t be in request.args or request.form
+        will be inside of request.json!
+
+Testing our API
+    We will be testing the JSON response, not HTML
+    In particular, we’ll look at response.json, not response.data
