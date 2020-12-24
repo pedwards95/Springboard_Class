@@ -1,0 +1,21 @@
+1. Using Gmail, create an interface to set up auto replies based on content.
+This would actually rely partially on my own database to store the phrases 
+and replies. User can add/remove/see/update those key terms and replies.
+Example: Message includes "how to I make a payment on my account"
+Send HowToMakeAPayment.html in email back
+https://developers.google.com/gmail/api/
+
+2. BestBuy online store, I do not wish to actually have it make the order, 
+so I will probably use local storage to 'track' purchases. They will have a 
+delivery time, as well as an ability to cancel or refund. The api would be for
+item lookup and prices only, the rest of the functions would be simulated.
+https://bestbuyapis.github.io/api-documentation/#getting-started
+
+3. Make my own. Most of the apis I have seen here do not support CRUD 
+operations, and understandably because a public/free api would probably get
+either emptied or flooded if it did. I can make an API for managing 
+employees where you can read current employees. With the addition of proper
+authentification, one can add, remove (only new, if they are old employees, 
+they can only be disabled, aka they dont work here any more), update pay, 
+set rank/position. Possibly would be able to see time worked. If you ARE the 
+employee, you can change your hours. Boss can change any hours.
