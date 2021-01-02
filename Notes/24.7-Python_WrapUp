@@ -1,0 +1,85 @@
+Python Is …
+    high-level: you think at a relatively high-level
+    dynamic: running script can create its own functions/classes
+    dynamically-typed: same variable can be used for int/string/etc
+    strongly-typed: “a” + 3 doesn’t eval to “a3”
+    compiled
+        gets “compiled” into “bytecode”:
+        It happens when you first run/import Python file.
+        Previously-compiled version is stored in __pycache__/add.pyc
+
+Python Can Have Type Hints
+    def add(x: int, y: int) -> int:
+        """Add x and y and return results."""
+        return num1 + num2
+
+    Editors can use this to help find errors
+    Can produce prettier help/API documentation
+
+Yield
+    def evens(start):
+        """Yield even numbers starting at start."""
+        while True:
+            yield start
+            start = start + 2
+
+    yield is like “return this value now, and remember where it left off”
+
+Operator Overloading
+    In both JS and Python, some operators (like +) mean different things, depending on the types of objects being acted on:
+
+    def __eq__(self, other):
+        "Is self == other?"
+        return self.lower() == other.lower()
+
+    def __lt__(self, other):
+        "Is self < other?"
+        return self.lower() < other.lower()
+
+    def __le__(self, other):
+        "Is self <= other?"
+        return self.lower() <= other.lower()
+
+Python Libraries
+    queues and stacks
+    binary search trees
+    statistics
+    complex numbers, fractions, cool math stuff
+    functional programming helpers
+
+Beautiful Soup
+    Web scraper
+
+Common Data Science Libraries
+    Numpy
+        Super-fast linear algebra and matrix math
+    Pandas
+        Data slicing/grouping/querying
+    SciKit-Learn
+        Common machine learning algorithms
+
+Jupyter
+    “interactive computing”
+    Can mix in documentation, drawings, code snippets
+    Often used to play with data or share analyses
+    Can publish on the web
+    Can even interactively edit as a group!
+
+Zen Of Python
+    Beautiful is better than ugly
+    Readability counts
+
+    Explicit is better than implicit
+
+    Simple is better than complex
+    Complex is better than complicated
+
+    Special cases aren't special enough to break the rules
+        Although practicality beats purity
+
+    Errors should never pass silently
+
+    In the face of ambiguity, refuse the temptation to guess
+
+    If the implementation is hard to explain, it's a bad idea
+    If the implementation is easy to explain, it may be a good idea

@@ -1,0 +1,110 @@
+url_for
+    @app.route("/users/<int:id>")
+    def user_profile(id): ...
+
+    <a href="{{ url_for('user_profile', id=user.id) }}">go</a>
+
+    from flask import url_for
+
+    def some_other_view():
+        ...
+        redirect_url = url_for('user_profile', id=user.id)
+        return redirect(redirect_url)
+
+Blueprints
+    Build “applications” in Flask:
+    Each app can have own models, forms, tests, views
+    Can re-use an app in many sites
+    Many sites could use “blogly” app
+    Useful for larger/more complex sites
+
+Signals
+    “When [this thing] happens, do [this other] thing.”
+
+Lots of Jinja Stuff
+    sharing parts of templates/repeated code
+    formatting of numbers, dates, lists in the template
+    caching parts of templates (“this part only changes every 5 mins”)
+    and more!
+
+Popular Add-Ons
+    WTForms & SQLA
+        you can do this
+        def edit_pet(pet_id):
+            pet = Pet.query.get(pet_id)
+            form = EditPetForm(obj=pet)
+
+            if form.validate_on_submit():
+                form.populate_obj(pet)
+
+    WTForms-Alchemy
+        Can generate WTForms from SQLAlchemy model:
+            forms.py
+            from flask_wtf import FlaskForm
+            from wtforms_alchemy import model_form_factory
+            from models import db, Pet, Owner
+
+            BaseModelForm = model_form_factory(FlaskForm)
+
+            class ModelForm(BaseModelForm):
+                @classmethod
+                def get_session(self):
+                    return db.session
+
+            class PetForm(ModelForm):
+                class Meta:
+                    model = Pet
+
+            class OwnerForm(ModelForm):
+                class Meta:
+                    model = Owner
+
+    Flask-Login
+        Product that provides common parts of user/passwords/login/logout
+
+    Flask-Mail
+        Can send email from Flask!
+
+    Flask-Admin
+        Can get decent CRUD admin views from SQLAlchemy models
+
+    Flask-Restless
+        Get CRUD API endpoints from SQLAlchemy models
+
+Flask v Django
+    Django is a popular, larger, more featureful Python Framework.
+    It’s a higher level and more opinionated
+        Flask model.py
+        class Pet(db.Model):
+            id = ...
+            name = ...
+            color = ...
+            owner_id = ...
+
+            owner = db.relationship("Owner", backref="pets")
+        Django model.py
+        class Pet(models.Model):
+            name = ...
+            color = ...
+            owner = models.ForeignKey("Owner")
+    # assumes "id" of auto-incrementing int
+    # defines relationship & make "owner_id" column
+        Flask app.py
+        @app.route("/pets/<int:id>/edit", methods=["GET", "POST"])
+        def edit_pet(id):
+            """Show pet edit form / handle edit."""
+
+            pet = Pet.query.get(id)
+            form = PetEditForm(obj)    # need to make form!
+
+            if form.validation_on_submit():
+                pet.name = form.name.data
+                pet.color = form.color.data
+                db.session.commit()
+                redirect(f"/pets/{id}")
+
+            return render_template("pet_edit.html", form=form)
+        Django views.py
+        class PetEditView(generic.UpdateView):
+            """Show pet edit form / handle edit."""
+            model = Pet

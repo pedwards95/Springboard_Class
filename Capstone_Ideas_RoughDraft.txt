@@ -19,3 +19,9 @@ authentification, one can add, remove (only new, if they are old employees,
 they can only be disabled, aka they dont work here any more), update pay, 
 set rank/position. Possibly would be able to see time worked. If you ARE the 
 employee, you can change your hours. Boss can change any hours.
+
+4. As a middle manager at Macys, the most common question I am asked by both employees and customers is, “Where can I find X clothing?” I can develop an app that can tell 
+you where the item would be found in the store. The app would have a map, and the section where the particular style or brand is located would be highlighted, 
+as well as the name of the section. I have requested access to Macy’s internal API that they use on the in store registers, but even if they do not give it to me, 
+I can still use brands/departments/locations. Two potential extras to add on would be actual directions from where they are standing to the area, 
+and turning it from a web application to a phone application.  
