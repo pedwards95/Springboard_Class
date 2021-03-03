@@ -1,0 +1,14 @@
+0.1
+    Implimented logout
+    Implimented header image, location, and bio into profile view
+    Added bio info to followed and following info cards
+    Added edit user form
+    Implemented editing profile
+    Added bio to index
+    Fixed homepage to only show own and followed warbles
+    Fixed unfollow html bug
+    added Likes
+    no longer shows like button on own posts
+    can now see all liked posts from profile
+    can now unlike in profile
+    tests
