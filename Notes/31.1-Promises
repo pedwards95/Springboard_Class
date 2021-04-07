@@ -1,0 +1,221 @@
+Asynchronous JavaScript
+    JavaScript runs synchronously, but there’s a way to handle async code: asynchronous callbacks.
+        console.log("this prints first");
+        setTimeout(function() {
+          console.log("this prints third, one second later");
+        }, 1000);
+        console.log("this prints second");
+
+Async + AJAX
+    Let’s try to pull some data with jQuery, which utilizes callbacks (we’re just using this as an example since axios doesn’t support callbacks):
+        let planet;
+        $.getJSON("https://swapi.dev/api/planets/1/", response => {
+          planet = response;
+          console.log("done", planet);
+        });
+
+    Asynchronous callbacks run after the rest of the code
+    Once you are inside the callback, the code executes predictably as per usual, (unless there are more async callbacks in there)
+
+Promises
+    let url = "https://swapi.dev/api/planets/1/"
+    let ourFirstPromise = axios.get(url);
+    console.log(ourFirstPromise);
+
+    axios is a promise based library for making HTTP requests.
+        syntactically, it’s similar to the jQuery AJAX methods, but doesn’t use the callback pattern.
+
+What exactly is a Promise?
+    Promises in JavaScript are objects
+    A promise can be in one of three states:
+        Pending - It doesn’t yet have a value
+        Resolved - It has successfully obtained a value
+        Rejected - It failed to obtain a value for some reason
+    The only way to access the resolved or rejected value is to chain a method on the end of the promise.
+        .then and .catch
+        Promises provide a .then and a .catch, which both accept callbacks.
+            The callback to .then will run if the promise is resolved, and has access to the promise’s resolved value.
+            The callback to .catch will run if the promise is rejected, and typically has access to some reason behind the rejection.
+
+When reading about promises, you’ll often see a related term, called a thenable. 
+    A thenable is simply any object or function that has a then method defined on it.
+    By this definition, all promises are thenables, but not all thenables are promises! 
+        There are many more specifications that a promise needs to satisfy.
+
+Here’s a simple example of a thenable that isn’t a promise:
+    let notAPromise = {
+      fruit: "apple",
+      veggie: "carrot",
+      then: () => {
+        console.log("I'm just a random object with a then method.");
+      }
+    };
+
+        let validURL = "https://swapi.dev/api/people/1/";
+        let futureResolvedPromise = axios.get(validURL);
+
+        futureResolvedPromise
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
+
+        let invalidURL = "https://swapi.dev/api/tacos/1/";
+        let futureRejectedPromise = axios.get(invalidURL);
+
+        futureRejectedPromise
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
+
+Promise Chaining
+    When you call .then on a promise, you can return new promise in the callback!
+    This means you can chain multiple asynchronous operations together with several .then calls.
+    When using this pattern, you only need one .catch at the end. You don’t have to catch every promise individually.
+
+        let baseURL = "https://pokeapi.co/api/v2/pokemon";
+
+        axios
+        .get(`${baseURL}/1/`)
+        .then(p1 => {
+            console.log(`The first pokemon is ${p1.data.name}`);
+            return axios.get(`${baseURL}/2/`);
+        })
+        .then(p2 => {
+            console.log(`The second pokemon is ${p2.data.name}`);
+            return axios.get(`${baseURL}/3/`);
+        })
+        .then(p3 => {
+            console.log(`The third pokemon is ${p3.data.name}`);
+        })
+        .catch(err => {
+            console.log(`Oops, there was a problem :( ${err}`);
+        });
+
+
+Takeaways
+
+Pokemon with Promises
+    let baseURL = "https://pokeapi.co/api/v2/pokemon";
+
+    axios
+    .get(`${baseURL}/1/`)
+    .then(p1 => {
+        console.log(`The first pokemon is ${p1.data.name}`);
+        return axios.get(`${baseURL}/2/`);
+    })
+    .then(p2 => {
+        console.log(`The second pokemon is ${p2.data.name}`);
+        return axios.get(`${baseURL}/3/`);
+    })
+    .then(p3 => {
+        console.log(`The third pokemon is ${p3.data.name}`);
+    })
+    .catch(err => {
+        console.log(`Oops, there was a problem :( ${err}`);
+    });
+
+
+There are also several helper methods that live on Promise, including:
+    Promise.all
+    Promise.race
+    Promise.resolve
+    Promise.reject
+
+In general, you’ll typically find that Promise.all is by far the most useful method on the Promise function. 
+    There are definitely use-cases for Promise.race, Promise.resolve, and Promise.reject, but they are more rare.
+
+Promise.all
+    Promise.all accepts an array of promises and returns a new promise
+    This new promise will resolve when every promise in the array resolves, and will be rejected if any promise in the array is rejected
+        let fourPokemonPromises = [];
+
+        for (let i = 1; i < 5; i++) {
+          fourPokemonPromises.push(
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+          );
+        }
+
+        Promise.all(fourPokemonPromises)
+          .then(pokemonArr => (
+            pokemonArr.forEach(p => console.log(p.name))
+          ))
+          .catch(err => console.log(err));
+
+Promise.race
+    Promise.race accepts an array of promises and returns a new promise
+    This new promise will resolve or reject as soon as one promise in the array resolves or rejects
+        let fourPokemonRace = [];
+
+        for (let i = 1; i < 5; i++) {
+        fourPokemonRace.push(
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+        );
+        }
+
+        Promise.race(fourPokemonRace)
+        .then(pokemon => console.log(`${pokemon.name} won!`))
+        .catch(err => console.log(err));
+
+Promise.resolve
+    Promise.resolve accepts a value and returns a promise which has immediately resolved to the value passed in.
+        let resolvedValue = "hello!";
+        let p1 = Promise.resolve(resolvedValue);
+        p1; // Promise {<resolved>: "hello!"}
+        p1 === value; // false
+
+Promise.reject
+    Promise.reject accepts a value and returns a promise which has immediately rejected to the value passed in.
+        let rejectedValue = "sorry :(";
+        let p2 = Promise.reject(rejectedValue);
+        p2; // Promise {<rejected>: "sorry :("}
+        p2 === value; // false
+
+Building our own Promises
+    You can use Promise with the new keyword to make your own promises
+    Unfortunately, the syntax here takes some getting used to
+    Promise accepts a single function (call it fn) as an argument
+    fn accepts two functions as arguments, resolve and reject
+    Pass resolve a value for the promise to resolve to that value
+    Pass reject a value for the promise to reject to that value
+
+Making Promises: An Example
+    let mockAjaxRequest = new Promise(function(resolve, reject) {
+    let probSuccess = 0.5;
+    let requestTime = 1000;
+
+    // We mock a network request using a setTimeout.
+    // The request takes requestTime milliseconds.
+    // Afterwords, the promise is either resolved with data
+    // or rejected with a timeout message,
+    // based on whether randomNum is less than probSuccess.
+    setTimeout(function() {
+        let randomNum = Math.random();
+        if (randomNum < probSuccess) {
+        let data = "here's your data!";
+        resolve(data);
+        } else {
+        reject("Sorry, your request failed.");
+        }
+    }, requestTime);
+    });
+
+    mockAjaxRequest
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+
+Asynchronous Function Pattern
+        function myAsyncFunction() {
+        // return a new Promise
+        return new Promise((resolve, reject) => {
+            /*
+
+            DO ASYNC STUFF HERE
+
+            */
+
+            // if it succeeds, call the resolve callback
+            resolve(/* success value*/);
+
+            // if it fails, call the reject callback
+            reject(/* fail value*/);
+        });
+        }
