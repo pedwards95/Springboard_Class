@@ -21,14 +21,8 @@ async function log(promise) {
 }
 
 async function cat(path) {
-    return await fs.readFile(`${path}`,'utf8',(err,data) => {
-        if(err) {
-            console.log(`Error: ENOENT: no such file or directory, open ${path}`);
-            process.kill(1);
-        }
-        console.log(data);
-        return data;
-    })
+    const data = await fs.promises.readFile(`${path}`,'utf8');
+    return data;
 }
 
 async function webCat(url) {
@@ -42,27 +36,29 @@ async function webCat(url) {
         });
 }
 
+
+
 const regEx1 = /.txt/
 if(regEx1.exec(argv[2])) {
-    //log(cat(argv[2]));
-    logCat(argv[2])
+    log(cat(argv[2]));
+    //logCat(argv[2])
 }
 
 const regEx2 = /.com/
 if(regEx2.exec(argv[2])) {
-    //console.log(webCat(argv[2]));
-    logWebCat(argv[2])
+    console.log(webCat(argv[2]));
+    //logWebCat(argv[2])
 }
 
 const regEx3 = /--out/
 if(regEx3.exec(argv[2])) {
     if(regEx1.exec(argv[3])) {
-        //output(cat(argv[3]));
-        outputCat(argv[3])
+        output(cat(argv[3]));
+        //outputCat(argv[3])
     }
     else if(regEx2.exec(argv[3])) {
-        //output(webCat(argv[3]));
-        outputWebCat(argv[3]);
+        output(webCat(argv[3]));
+        //outputWebCat(argv[3]);
     }   
 }
 
