@@ -40,28 +40,31 @@ router.get('/:id', async (req,res,next) => {
     }
 })
 
-router.post('/:id', async (req,res,next) => {
+router.post('/', async (req,res,next) => {
     try {
-        const {id} =req.params;
         const { name,type } = req.body;
         const results = await db.query('INSERT INTO users (name, type) VALUES ($1, $2) RETURNING *',[name,type])
-        return res.json(results.rows);
+        return res.json({user: results.rows[0]});
     } catch(e) {
         return next(e)
     }
 })
 
-router.patch('/', async (req,res,next) => {
+router.patch('/:id', async (req,res,next) => {
     try {
+        const {id} = req.params;
         const {name,type} = req.body;
         const results = await db.query('UPDATE users SET name=$1, type=$2 WHERE id=$3 RETURNING id, name, type',[name,type,id])
-        return res.send(results.rows[0])
+        if(results.rows.length === 0) {
+            throw new ExpressError(`Cant update user with id of ${id}`,404)
+        }
+        return res.send({user: results.rows[0]})
     } catch(e) {
         return next(e);
     }
 })
 
-router.delete('/', async (req,res,next) => {
+router.delete('/:id', async (req,res,next) => {
     try {
         db.query('DELETE FROM users WHERE id=$1',[req.params.id])
         return res.send({msg:"DELETED"})
