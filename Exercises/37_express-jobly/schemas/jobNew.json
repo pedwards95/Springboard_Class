@@ -1,0 +1,55 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1624481750.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"title",
+		"salary",
+		"equity",
+		"companyHandle"
+	],
+	"properties": {
+		"title": {
+			"$id": "#root/title", 
+			"title": "Title", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"New"
+			],
+			"pattern": "^.*$"
+		},
+		"salary": {
+			"$id": "#root/salary", 
+			"title": "Salary", 
+			"type": "integer",
+			"examples": [
+				100
+			],
+			"default": 0
+		},
+		"equity": {
+			"$id": "#root/equity", 
+			"title": "Equity", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"0.1"
+			],
+			"pattern": "^.*$"
+		},
+		"companyHandle": {
+			"$id": "#root/companyHandle", 
+			"title": "Companyhandle", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"c1"
+			],
+			"pattern": "^.*$"
+		}
+	}
+}
+

@@ -18,7 +18,7 @@ CREATE TABLE users (
 
 CREATE TABLE jobs (
   id SERIAL PRIMARY KEY,
-  title TEXT NOT NULL,
+  title TEXT UNIQUE NOT NULL,
   salary INTEGER CHECK (salary >= 0),
   equity NUMERIC CHECK (equity <= 1.0),
   company_handle VARCHAR(25) NOT NULL
