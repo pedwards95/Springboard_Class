@@ -33,7 +33,7 @@ function makeMultiplyFunc(num)
 }
 
 // greet();
-// alert("I AM ALERT");
+alert("I AM ALERT");
 // diss();
 
 // greet();
@@ -78,7 +78,7 @@ const printOne = function()
     console.log(1);
 }
 
-const funcs = [function() {}, function() {}]
+funcs = [function() {}, function() {}]
 
 
 
