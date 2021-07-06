@@ -1,0 +1,222 @@
+Testing in React
+React can use any testing framework
+create-react-app ships with jest and react-testing-library
+npm test is set up to find & run jest tests
+Files like .test, .spec, or in __tests__ folder
+At Rithm, we prefer *.test.js in same folder as component
+npm test runs all tests; can optionally specify a file
+React Testing Library
+React Testing Library is a popular testing add-on for React
+Guiding principle: “The more your tests resemble the way your software is used, the more confidence they can give you.”
+Tests focus on mimicking how people interact with your site, not implementation details
+Types of Tests
+Smoke Tests
+
+Does the component render, or does it blow up (like a smoking box)?
+Snapshot Tests
+
+Does the component’s rendered HTML render in the way you expect?
+Smoke Tests
+Smoke Tests Working Example
+ 
+$ npm test App.test.js
+
+PASS src/App.test.js
+  ✓ renders without crashing (4ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.283s
+Ran all test suites matching /App.test.js/i.
+Render
+React Testing Library’s render method…
+
+Creates a <div>
+Renders your JSX into the div
+Returns an object of methods (more on this later)
+Smoke Tests Broken Example
+ 
+What’s the problem?
+
+$ npm test BrokenComponent.test.js
+
+FAIL  src/BrokenComponent.test.js
+ ✕ renders without crashing (33ms)
+
+ ● renders without crashing
+
+  TypeError: Cannot assign to read only property 'favNum' of object
+  '#<Object>'
+
+     7 |       <p>Here are some numbers!</p>
+     8 |       <p>{props.favNum}</p>
+  >  9 |       <p>{props.favNum++}</p>
+       |           ^
+    10 |       <p>{props.favNum++}</p>
+    11 |     </div>
+    12 |   );
+
+    at BrokenComponent.render (src/BrokenComponent.js:9:11)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        3.073s
+Ran all test suites matching /BrokenComponent.test.js/i.
+Snapshot Tests
+Smoke tests are easy to write, but only test that component renders.
+
+Snapshot tests are also easy, but go a bit further: did rendering change?
+
+Render Revisited
+React Testing Library’s render method…
+
+Returns an object of methods
+One method is called asFragment
+asFragment returns the underlying DOM structure of the component
+very useful for snapshot tests!
+Snapshot Tests Example
+ 
+$ npm test FixedComponent.test.js
+
+PASS  src/FixedComponent.test.js
+✓ renders without crashing (20ms)
+✓ matches snapshot (16ms)
+
+ › 1 snapshot written.
+ Snapshot Summary
+ › 1 snapshot written from 1 test suite.
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   1 written, 1 total
+Jest compares the current snapshot with the saved snapshot, and throws a test error if they are different.
+
+Jest stores these in __snapshots__.
+
+Let’s change FixedComponent rendering slightly…
+
+$ npm test FixedComponent.test.js
+
+FAIL  src/FixedComponent.test.js
+✓ renders without crashing (19ms)
+✕ matches snapshot (21ms)
+
+ ● matches snapshot
+
+  - Snapshot
+  + Received
+
+    <p>
+  -   44
+  +   62
+    </p>
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 1 total
+Snapshots:   1 failed, 1 total
+If you intended change, press u to tell Jest to update snapshot.
+
+Snapshot Tests with Different Props
+If your component can have different UI, you may want to create multiple snapshots.
+
+Example:
+
+Takeaway
+Snapshot tests are almost as easy to write as smoke tests …
+
+… while offering a great benefit: did you change the output?
+
+Specialized Testing
+Snapshot testing can be helpful.
+
+But often you’ll need to test what happens as people interact with your app.
+
+How do we test that events (button clicks, form submits, etc.) produce the desired change?
+
+Render Revisited (Again)
+Here are some other methods that render returns to you:
+
+.getByText()
+Find first matching element by its text (throws error if nothing found)
+.queryByText()
+Find first matching element by its text (returns null if nothing found)
+.getAllByText()
+Like getByText but finds all matches
+.queryAllByText()
+Like queryByText but finds all matches
+.getByPlaceholderText() / queryByPlaceholderText()
+Find first matching element by placeholder text
+.getAllByPlaceholderText() / queryAllByPlaceholderText()
+Like above but finds all matches
+.getByTestId() / queryByTestId()
+Find matching element by a data-testid attribute (helpful if there’s no other convenient way to grab an element)
+.getAllByTestId() / queryAllByTestId()
+Like above but finds all matches
+Full list
+
+Extended Matchers
+By default, projects with Create React App come with a setup file that extends the matching capability of jest.
+
+Some helpful matchers:
+
+.toHaveClass()
+Check whether an element has a certain class
+.toBeInTheDocument()
+Check whether an element is in the document
+.toContainHTML()
+Check whether the element contains a certain HTML string
+.toBeEmpty()
+Check whether the element has any content
+Full list
+
+Testing Events
+React Testing Library provides a fireEvent method that you can use to mimic user interaction with your app.
+
+.fireEvent.click(HTMLElement)
+Fire a click event
+.fireEvent.submit(HTMLElement)
+Fire a submit event
+.fireEvent.input(HTMLElement)
+Fire an input event
+Documentation
+
+Specialized Testing Example
+Let’s test that the clicking functionality works!
+
+Debugging Tests
+Debugging from render
+render provides a debug method that will console.log a component’s DOM structure.
+
+const { debug } = render(<Counter />)
+debug(); // see the structure of the component
+
+fireEvent.click(getByText("Add"));
+debug(); // how has the structure changed?
+Debugging Tests
+If you want to set break points, edit your package JSON to include:
+
+package.json
+"scripts": {
+  // ... keep other things and add this
+  "test:debug": "react-scripts --inspect-brk test --runInBand"
+}
+Add debugger line in test or component you want to test
+
+And now npm run test:debug will run tests where you can use Chrome debugger!
+
+Visit chrome://inspect to debug in Chrome.
+
+Wrap Up
+Smoke tests are incredibly simple — always make one!
+Snapshot tests are very easy if output is predictable
+Use specialized testing if you need more specific tests or to test interactions
+Will I Use React Testing Library?
+Maybe.
+
+There are other testing libraries for React.
+
+The most popular alternative is Enzyme, created by Airbnb.
+
+Enzyme focuses more on testing React; React Testing Library focuses more on the end result in the DOM.
